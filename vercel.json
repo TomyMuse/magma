@@ -3,12 +3,19 @@
   "cleanUrls": true,
   "rewrites": [
     {
-      "source": "/",
-      "destination": "/index.html"
-    },
+      "source": "/:path",
+      "destination": "/:path.html"
+    }
+  ],
+  "headers": [
     {
-      "source": "/tienda",
-      "destination": "/tienda.html"
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        }
+      ]
     }
   ]
 }
