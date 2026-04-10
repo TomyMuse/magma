@@ -27,6 +27,10 @@
       }
 
       * { box-sizing: border-box; }
+      :focus-visible {
+        outline: 2px solid rgba(138, 59, 45, 0.42);
+        outline-offset: 2px;
+      }
       body {
         margin: 0;
         font-family: "Manrope", sans-serif;
@@ -36,7 +40,20 @@
           radial-gradient(circle at 92% 18%, rgba(138, 59, 45, 0.08), transparent 36%),
           var(--surface);
       }
-      .container { width: min(1240px, calc(100% - 2rem)); margin-inline: auto; }
+.container { width: min(1240px, calc(100% - 2rem)); margin-inline: auto; }
+      .top-bar {
+        background: var(--primary);
+        color: #fff;
+        font-size: 0.75rem;
+        text-align: center;
+        padding: 0.45rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .top-bar a {
+        color: #fff;
+        text-decoration: underline;
+      }
       .tag {
         text-transform: uppercase;
         letter-spacing: 0.28em;
@@ -79,9 +96,16 @@
         letter-spacing: 0.14em;
         color: var(--secondary);
         font-weight: 700;
+        padding-bottom: 0.2rem;
+        border-bottom: 1px solid transparent;
+        transition: color 160ms ease, border-color 160ms ease;
       }
       .nav-links a.active { color: var(--primary); }
-      .nav-links a:hover { color: var(--primary); }
+      .nav-links a.active,
+      .nav-links a:hover {
+        color: var(--primary);
+        border-bottom-color: rgba(138, 59, 45, 0.42);
+      }
       .actions { display: inline-flex; gap: 0.6rem; align-items: center; }
       .icon-btn {
         width: 40px;
@@ -130,6 +154,10 @@
         display: grid;
         grid-template-columns: 1fr auto;
         gap: 0.8rem;
+        position: sticky;
+        top: 86px;
+        z-index: 20;
+        box-shadow: 0 10px 22px rgba(138, 59, 45, 0.08);
       }
       .filters { display: flex; gap: 0.55rem; flex-wrap: wrap; }
       .chip {
@@ -143,7 +171,9 @@
         letter-spacing: 0.08em;
         font-weight: 700;
         cursor: pointer;
+        transition: transform 150ms ease, filter 150ms ease;
       }
+      .chip:hover { transform: translateY(-1px); }
       .chip.active { background: linear-gradient(110deg, var(--primary), var(--primary-2)); color: #fff; }
       .sort {
         border: 0;
@@ -168,6 +198,11 @@
         display: flex;
         flex-direction: column;
         gap: 0.8rem;
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 20px 34px rgba(138, 59, 45, 0.14);
       }
       .media {
         aspect-ratio: 4 / 5;
@@ -199,7 +234,10 @@
         letter-spacing: 0.12em;
         font-weight: 700;
         cursor: pointer;
+        transition: transform 150ms ease, box-shadow 150ms ease, filter 150ms ease;
       }
+      .btn:hover { transform: translateY(-1px); }
+      .btn:active { transform: scale(0.98); }
       .btn.primary {
         color: #fff;
         background: linear-gradient(108deg, var(--primary), var(--primary-2));
@@ -269,10 +307,14 @@
         .toolbar { grid-template-columns: 1fr; }
         .products { grid-template-columns: 1fr; }
         .site-nav .brand img { width: 59px; height: 59px; }
+        .toolbar { top: 78px; }
       }
     </style>
   </head>
-  <body>
+<body>
+    <div class="top-bar">
+      <div class="container">🎉 Envíos gratis en compras superiores a $60.000 · <a href="./tienda.html">Ver ofertas</a></div>
+    </div>
     <header class="site-header">
       <div class="container site-nav">
         <a class="brand" href="./index.html" aria-label="Ir al inicio">
