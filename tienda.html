@@ -1,0 +1,564 @@
+﻿<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tienda | Magma Ceramica</title>
+    <meta
+      name="description"
+      content="Tienda Magma Ceramica: bowls, tazas, sets y piezas de autor hechas a mano en Buenos Aires."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700&family=Manrope:wght@400;500;600;700;800&family=Noto+Serif:ital,wght@0,500;0,600;1,500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --primary: #8a3b2d;
+        --primary-2: #a85243;
+        --secondary: #745949;
+        --surface: #fcf9f4;
+        --surface-low: #f6f3ee;
+        --surface-container: #f0ede8;
+        --surface-high: #e5e2dd;
+        --text: #1c1c19;
+      }
+
+      * { box-sizing: border-box; }
+      body {
+        margin: 0;
+        font-family: "Manrope", sans-serif;
+        color: var(--text);
+        background:
+          radial-gradient(circle at 8% 12%, rgba(168, 82, 67, 0.12), transparent 46%),
+          radial-gradient(circle at 92% 18%, rgba(138, 59, 45, 0.08), transparent 36%),
+          var(--surface);
+      }
+      .container { width: min(1240px, calc(100% - 2rem)); margin-inline: auto; }
+      .tag {
+        text-transform: uppercase;
+        letter-spacing: 0.28em;
+        font-size: 0.68rem;
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 60;
+        backdrop-filter: blur(12px);
+        background: rgba(252, 249, 244, 0.82);
+        box-shadow: 0 8px 24px rgba(138, 59, 45, 0.08);
+      }
+      .site-nav {
+        min-height: 74px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .brand { display: inline-flex; align-items: center; gap: 0.7rem; }
+      .brand img { width: 42px; height: 42px; object-fit: contain; }
+      .site-nav .brand img { width: 65px; height: 65px; }
+      .brand strong {
+        font-family: "Cormorant Garamond", serif;
+        font-size: clamp(1.2rem, 1.85vw, 1.75rem);
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        font-style: normal;
+        text-transform: uppercase;
+        color: #2a2320;
+      }
+      .nav-links { display: inline-flex; gap: 1.8rem; }
+      .nav-links a {
+        text-decoration: none;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.14em;
+        color: var(--secondary);
+        font-weight: 700;
+      }
+      .nav-links a.active { color: var(--primary); }
+      .nav-links a:hover { color: var(--primary); }
+      .actions { display: inline-flex; gap: 0.6rem; align-items: center; }
+      .icon-btn {
+        width: 40px;
+        height: 40px;
+        border-radius: 999px;
+        border: 0;
+        cursor: pointer;
+        color: var(--primary);
+        background: rgba(138, 59, 45, 0.08);
+      }
+      .count {
+        min-width: 1.25rem;
+        height: 1.25rem;
+        border-radius: 999px;
+        background: var(--primary);
+        color: #fff;
+        display: inline-grid;
+        place-items: center;
+        font-size: 0.62rem;
+        font-weight: 700;
+      }
+
+      .hero {
+        padding: clamp(2.6rem, 5vw, 4.6rem) 0 2rem;
+      }
+      .hero h1 {
+        margin: 0.8rem 0 0;
+        font-family: "Noto Serif", serif;
+        font-size: clamp(2rem, 5vw, 4rem);
+        line-height: 1.02;
+        letter-spacing: -0.02em;
+      }
+      .hero p {
+        margin: 1rem 0 0;
+        max-width: 64ch;
+        color: #5f544d;
+        line-height: 1.75;
+      }
+
+
+      .toolbar {
+        margin-top: 2rem;
+        background: var(--surface-low);
+        border-radius: 1rem;
+        padding: 0.9rem;
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 0.8rem;
+      }
+      .filters { display: flex; gap: 0.55rem; flex-wrap: wrap; }
+      .chip {
+        border: 0;
+        background: var(--surface-high);
+        color: #2c2622;
+        padding: 0.62rem 0.82rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .chip.active { background: linear-gradient(110deg, var(--primary), var(--primary-2)); color: #fff; }
+      .sort {
+        border: 0;
+        border-radius: 0.7rem;
+        padding: 0.62rem 0.74rem;
+        background: #fff;
+        color: #2a2420;
+        font-weight: 600;
+      }
+
+      .products {
+        padding: 1.4rem 0 4rem;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 1rem;
+      }
+      .card {
+        background: var(--surface);
+        border-radius: 1rem;
+        padding: 0.85rem;
+        box-shadow: 0 16px 26px rgba(138, 59, 45, 0.09);
+        display: flex;
+        flex-direction: column;
+        gap: 0.8rem;
+      }
+      .media {
+        aspect-ratio: 4 / 5;
+        overflow: hidden;
+        border-radius: 0.8rem;
+        background: var(--surface-container);
+      }
+      .media img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 260ms ease;
+      }
+      .card:hover .media img { transform: scale(1.04); }
+      .name {
+        margin: 0;
+        font-family: "Noto Serif", serif;
+        font-size: 1.2rem;
+      }
+      .meta { margin: 0.28rem 0 0; color: #63544a; font-size: 0.9rem; }
+      .price { margin: 0.54rem 0 0; color: var(--primary); font-weight: 800; }
+      .row { display: flex; justify-content: space-between; align-items: center; gap: 0.6rem; }
+      .btn {
+        border: 0;
+        border-radius: 0.72rem;
+        padding: 0.76rem 0.9rem;
+        font-size: 0.7rem;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-weight: 700;
+        cursor: pointer;
+      }
+      .btn.primary {
+        color: #fff;
+        background: linear-gradient(108deg, var(--primary), var(--primary-2));
+      }
+      .btn.soft {
+        color: #2c2622;
+        background: var(--surface-high);
+      }
+
+      .cart-drawer {
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: min(380px, 92vw);
+        height: 100dvh;
+        background: rgba(252, 249, 244, 0.96);
+        backdrop-filter: blur(10px);
+        box-shadow: -24px 0 46px rgba(138, 59, 45, 0.15);
+        transform: translateX(102%);
+        transition: transform 260ms ease;
+        z-index: 90;
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+      }
+      .cart-drawer.open { transform: translateX(0); }
+      .drawer-head, .drawer-foot { padding: 1rem; }
+      .drawer-head { display: flex; justify-content: space-between; align-items: center; }
+      .drawer-head h3 { margin: 0; font-family: "Noto Serif", serif; }
+      .drawer-body { overflow: auto; padding: 0 1rem 1rem; }
+      .cart-item {
+        background: var(--surface-container);
+        border-radius: 0.9rem;
+        padding: 0.65rem;
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        gap: 0.65rem;
+        margin-bottom: 0.6rem;
+      }
+      .cart-item img { width: 64px; height: 64px; border-radius: 0.55rem; object-fit: cover; }
+      .cart-item strong { font-size: 0.9rem; }
+      .cart-item span { color: #65584f; font-size: 0.82rem; }
+      .total { display: flex; justify-content: space-between; font-weight: 800; margin-bottom: 0.8rem; }
+
+      .overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(22, 19, 17, 0.34);
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 260ms ease;
+        z-index: 80;
+      }
+      .overlay.open { opacity: 1; pointer-events: auto; }
+
+      .site-footer {
+        padding: 2rem 0;
+        background: #ede8e2;
+        color: #6f6056;
+      }
+      .site-footer p { margin: 0; font-size: 0.9rem; }
+
+      @media (max-width: 1080px) {
+        .products { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+      @media (max-width: 720px) {
+        .nav-links { display: none; }
+        .toolbar { grid-template-columns: 1fr; }
+        .products { grid-template-columns: 1fr; }
+        .site-nav .brand img { width: 59px; height: 59px; }
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container site-nav">
+        <a class="brand" href="./index.html" aria-label="Ir al inicio">
+          <img src="./public/logo.png" alt="Logo Magma Ceramica" />
+        </a>
+
+        <nav class="nav-links" aria-label="Principal">
+          <a href="./index.html">Inicio</a>
+          <a class="active" href="./tienda.html">Tienda</a>
+          <a href="./index.html#taller">Talleres</a>
+          <a href="./index.html#mayorista">Mayorista</a>
+        </nav>
+
+        <div class="actions">
+          <button class="icon-btn" type="button" aria-label="Buscar">⌕</button>
+          <button id="openCart" class="icon-btn" type="button" aria-label="Abrir carrito">👜</button>
+          <span id="cartCount" class="count">0</span>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <span class="tag">Tienda Magma</span>
+        <h1>Piezas para comprar hoy, usar toda la vida.</h1>
+        <p>
+          Colecciones de autor en series cortas: bowls, sets, tazas y piezas unicas para mesa y hogar.
+          Todas las piezas estan hechas a mano en nuestro estudio de Buenos Aires.
+        </p>
+
+        <div class="toolbar">
+          <div class="filters" id="filters">
+            <button class="chip active" data-filter="all" type="button">Todo</button>
+            <button class="chip" data-filter="bowls" type="button">Bowls</button>
+            <button class="chip" data-filter="tazas" type="button">Tazas</button>
+            <button class="chip" data-filter="sets" type="button">Sets</button>
+            <button class="chip" data-filter="unicas" type="button">Piezas unicas</button>
+          </div>
+          <select class="sort" id="sort">
+            <option value="default">Ordenar: Destacados</option>
+            <option value="asc">Precio: menor a mayor</option>
+            <option value="desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+      </section>
+
+      <section class="products" id="productGrid">
+        <article class="card" data-category="tazas sets chops" data-price="58000">
+          <div class="media"><img src="./public/SaveClip.App_649699739_17993652941920685_3240829447011146932_n.jpg" alt="Set de tazas verdes" /></div>
+          <div>
+            <h3 class="name">Set Tazas Bosco</h3>
+            <p class="meta">Set x6 | Interior esmaltado brillante</p>
+            <p class="price">$58.000</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Set Tazas Bosco" data-price="58000" data-image="./public/SaveClip.App_649699739_17993652941920685_3240829447011146932_n.jpg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="bowls chops unicas" data-price="39500">
+          <div class="media"><img src="./public/625262061_18034343237765495_6938131803006591943_n.jpeg" alt="Bowl Orbit" /></div>
+          <div>
+            <h3 class="name">Bowl Orbit</h3>
+            <p class="meta">26 cm | Centro de mesa</p>
+            <p class="price">$39.500</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Bowl Orbit" data-price="39500" data-image="./public/625262061_18034343237765495_6938131803006591943_n.jpeg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="bowls sets" data-price="44000">
+          <div class="media"><img src="./public/SaveClip.App_655578528_18091219631330045_1019078361804900635_n.jpg" alt="Duo Sierra" /></div>
+          <div>
+            <h3 class="name">Duo Sierra</h3>
+            <p class="meta">Set x2 | Ideal para servir</p>
+            <p class="price">$44.000</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Duo Sierra" data-price="44000" data-image="./public/SaveClip.App_655578528_18091219631330045_1019078361804900635_n.jpg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="bowls decoracion unicas" data-price="36200">
+          <div class="media"><img src="./public/655439254_18104990270499726_1504171754844047591_n.jpeg" alt="Bowl Laguna" /></div>
+          <div>
+            <h3 class="name">Bowl Laguna</h3>
+            <p class="meta">22 cm | Serie cromatica</p>
+            <p class="price">$36.200</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Bowl Laguna" data-price="36200" data-image="./public/655439254_18104990270499726_1504171754844047591_n.jpeg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="bowls decoracion" data-price="41800">
+          <div class="media"><img src="./public/624599165_18056156174379675_9095367774909437050_n.jpeg" alt="Bowl Naranja" /></div>
+          <div>
+            <h3 class="name">Bowl Solar</h3>
+            <p class="meta">24 cm | Pieza de autor</p>
+            <p class="price">$41.800</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Bowl Solar" data-price="41800" data-image="./public/624599165_18056156174379675_9095367774909437050_n.jpeg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="sets bowls" data-price="52200">
+          <div class="media"><img src="./public/SaveClip.App_655708811_18208866220334211_1687735197626328638_n.jpg" alt="Coleccion bowls" /></div>
+          <div>
+            <h3 class="name">Set Aurora</h3>
+            <p class="meta">Set x4 | Coleccion color</p>
+            <p class="price">$52.200</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Set Aurora" data-price="52200" data-image="./public/SaveClip.App_655708811_18208866220334211_1687735197626328638_n.jpg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="decoracion unicas" data-price="61000">
+          <div class="media"><img src="./public/SaveClip.App_656243507_18136116310517299_572441670182864537_n.jpg" alt="Pigmentos del taller" /></div>
+          <div>
+            <h3 class="name">Caja Pigmento</h3>
+            <p class="meta">Pieza de estudio intervenida</p>
+            <p class="price">$61.000</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Caja Pigmento" data-price="61000" data-image="./public/SaveClip.App_656243507_18136116310517299_572441670182864537_n.jpg">Agregar</button>
+          </div>
+        </article>
+
+        <article class="card" data-category="decoracion chops unicas" data-price="46800">
+          <div class="media"><img src="./public/SaveClip.App_476349540_18031225991545275_206682916948926368_n.jpg" alt="Pieza de taller" /></div>
+          <div>
+            <h3 class="name">Fuente Terra</h3>
+            <p class="meta">Baja serie | Terminacion mate</p>
+            <p class="price">$46.800</p>
+          </div>
+          <div class="row">
+            <button class="btn soft" type="button">Ver detalle</button>
+            <button class="btn primary add-cart" type="button" data-name="Fuente Terra" data-price="46800" data-image="./public/SaveClip.App_476349540_18031225991545275_206682916948926368_n.jpg">Agregar</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© <span id="year"></span> Magma Ceramica. Tienda oficial.</p>
+      </div>
+    </footer>
+
+    <aside id="cartDrawer" class="cart-drawer" aria-hidden="true">
+      <div class="drawer-head">
+        <h3>Carrito</h3>
+        <button id="closeCart" class="icon-btn" type="button" aria-label="Cerrar carrito">✕</button>
+      </div>
+      <div class="drawer-body" id="cartItems">
+        <p style="color: #6e6055">Tu carrito esta vacio por ahora.</p>
+      </div>
+      <div class="drawer-foot">
+        <div class="total">
+          <span>Total</span>
+          <span id="cartTotal">$0</span>
+        </div>
+        <button class="btn primary" style="width: 100%" type="button">Iniciar compra</button>
+      </div>
+    </aside>
+    <div id="overlay" class="overlay"></div>
+
+    <script>
+      const moneyFormat = new Intl.NumberFormat("es-AR", {
+        style: "currency",
+        currency: "ARS",
+        maximumFractionDigits: 0,
+      });
+
+      const grid = document.getElementById("productGrid");
+      const cards = Array.from(grid.querySelectorAll(".card"));
+      const filterButtons = Array.from(document.querySelectorAll(".chip"));
+      const sortSelect = document.getElementById("sort");
+
+      const cart = [];
+      const cartCount = document.getElementById("cartCount");
+      const cartItems = document.getElementById("cartItems");
+      const cartTotal = document.getElementById("cartTotal");
+      const drawer = document.getElementById("cartDrawer");
+      const overlay = document.getElementById("overlay");
+
+      const openCart = () => {
+        drawer.classList.add("open");
+        overlay.classList.add("open");
+      };
+      const closeCart = () => {
+        drawer.classList.remove("open");
+        overlay.classList.remove("open");
+      };
+
+      const renderCart = () => {
+        cartCount.textContent = String(cart.length);
+        if (!cart.length) {
+          cartItems.innerHTML = '<p style="color: #6e6055">Tu carrito esta vacio por ahora.</p>';
+          cartTotal.textContent = moneyFormat.format(0);
+          return;
+        }
+
+        cartItems.innerHTML = cart
+          .map(
+            (item) => `
+              <article class="cart-item">
+                <img src="${item.image}" alt="${item.name}" />
+                <div>
+                  <strong>${item.name}</strong><br />
+                  <span>${moneyFormat.format(item.price)}</span>
+                </div>
+              </article>
+            `,
+          )
+          .join("");
+
+        const total = cart.reduce((acc, item) => acc + item.price, 0);
+        cartTotal.textContent = moneyFormat.format(total);
+      };
+
+      const renderProducts = () => {
+        const activeFilter = document.querySelector(".chip.active")?.dataset.filter || "all";
+        const order = sortSelect.value;
+
+        const filtered = cards.filter((card) => {
+          if (activeFilter === "all") return true;
+          const categories = card.dataset.category.split(" ");
+          return categories.includes(activeFilter);
+        });
+
+        const sorted = [...filtered].sort((a, b) => {
+          const pa = Number(a.dataset.price);
+          const pb = Number(b.dataset.price);
+          if (order === "asc") return pa - pb;
+          if (order === "desc") return pb - pa;
+          return 0;
+        });
+
+        grid.innerHTML = "";
+        sorted.forEach((card) => grid.appendChild(card));
+      };
+
+      const setFilter = (filterValue) => {
+        filterButtons.forEach((chip) => {
+          chip.classList.toggle("active", chip.dataset.filter === filterValue);
+        });
+        renderProducts();
+      };
+
+      filterButtons.forEach((button) => {
+        button.addEventListener("click", () => setFilter(button.dataset.filter));
+      });
+
+      sortSelect.addEventListener("change", renderProducts);
+
+      document.querySelectorAll(".add-cart").forEach((button) => {
+        button.addEventListener("click", () => {
+          cart.push({
+            name: button.dataset.name,
+            price: Number(button.dataset.price),
+            image: button.dataset.image,
+          });
+          renderCart();
+          openCart();
+        });
+      });
+
+      document.getElementById("openCart").addEventListener("click", openCart);
+      document.getElementById("closeCart").addEventListener("click", closeCart);
+      overlay.addEventListener("click", closeCart);
+
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      renderProducts();
+      renderCart();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+
+<html class="light" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&amp;family=Manrope:wght@300;400;600;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "surface-container": "#f0ede8",
+                    "on-primary-container": "#ffe8e4",
+                    "primary-container": "#a85243",
+                    "secondary-fixed": "#ffdbc8",
+                    "surface-dim": "#dcdad5",
+                    "on-primary-fixed": "#3f0401",
+                    "surface": "#fcf9f4",
+                    "inverse-on-surface": "#f3f0eb",
+                    "on-secondary-container": "#795d4d",
+                    "primary": "#8a3b2d",
+                    "outline": "#88726e",
+                    "surface-container-highest": "#e5e2dd",
+                    "primary-fixed": "#ffdad4",
+                    "outline-variant": "#dbc1bc",
+                    "on-tertiary-container": "#ffead8",
+                    "error-container": "#ffdad6",
+                    "surface-bright": "#fcf9f4",
+                    "secondary-container": "#fed8c4",
+                    "on-error": "#ffffff",
+                    "on-tertiary": "#ffffff",
+                    "surface-tint": "#984637",
+                    "background": "#fcf9f4",
+                    "surface-container-high": "#ebe8e3",
+                    "on-primary": "#ffffff",
+                    "on-secondary-fixed": "#2a170b",
+                    "on-tertiary-fixed": "#2c1600",
+                    "secondary-fixed-dim": "#e3bfac",
+                    "inverse-primary": "#ffb4a6",
+                    "tertiary-fixed": "#ffdcbd",
+                    "on-background": "#1c1c19",
+                    "tertiary": "#754917",
+                    "error": "#ba1a1a",
+                    "surface-variant": "#e5e2dd",
+                    "surface-container-low": "#f6f3ee",
+                    "on-primary-fixed-variant": "#7a2f22",
+                    "on-tertiary-fixed-variant": "#663d0b",
+                    "surface-container-lowest": "#ffffff",
+                    "secondary": "#745949",
+                    "on-secondary": "#ffffff",
+                    "on-surface": "#1c1c19",
+                    "primary-fixed-dim": "#ffb4a6",
+                    "on-secondary-fixed-variant": "#5a4133",
+                    "tertiary-fixed-dim": "#f7bb7e",
+                    "inverse-surface": "#31302d",
+                    "on-surface-variant": "#55433f",
+                    "tertiary-container": "#91612d",
+                    "on-error-container": "#93000a"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.5rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Noto Serif"],
+                    "body": ["Manrope"],
+                    "label": ["Manrope"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        h1, h2, h3 { font-family: 'Noto Serif', serif; }
+        .glass-header { backdrop-filter: blur(12px); }
+        .no-border { border: none !important; }
+        .keramic-gradient { background: linear-gradient(to right, #8a3b2d, #a85243); }
+        .image-overlay { background: linear-gradient(to top, rgba(28, 28, 25, 0.4), transparent); }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopNavBar -->
+<header class="bg-[#fcf9f4]/80 dark:bg-stone-900/80 backdrop-blur-xl docked full-width top-0 sticky shadow-sm shadow-[#8a3b2d]/5 z-50 transition-transform ease-out">
+<nav class="flex justify-between items-center w-full px-8 py-6 max-w-screen-2xl mx-auto">
+<div class="text-2xl font-bold tracking-tighter text-[#1c1c19] dark:text-[#fcf9f4] font-noto-serif">
+                MAGMA CERÁMICA
+            </div>
+<div class="hidden md:flex items-center space-x-12">
+<a class="text-[#8a3b2d] border-b-2 border-[#8a3b2d] pb-1 font-manrope text-sm uppercase tracking-widest hover:text-[#8a3b2d] transition-colors duration-300" href="#">Tienda</a>
+<a class="text-[#745949] dark:text-stone-400 font-manrope text-sm uppercase tracking-widest hover:text-[#8a3b2d] transition-colors duration-300" href="#">Talleres</a>
+<a class="text-[#745949] dark:text-stone-400 font-manrope text-sm uppercase tracking-widest hover:text-[#8a3b2d] transition-colors duration-300" href="#">Mayoristas</a>
+<a class="text-[#745949] dark:text-stone-400 font-manrope text-sm uppercase tracking-widest hover:text-[#8a3b2d] transition-colors duration-300" href="#">Nosotros</a>
+</div>
+<div class="flex items-center space-x-6 text-[#8a3b2d] dark:text-[#a85243]">
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+</button>
+<button class="hover:opacity-70 transition-opacity">
+<span class="material-symbols-outlined" data-icon="shopping_bag">shopping_bag</span>
+</button>
+</div>
+</nav>
+</header>
+<main>
+<!-- Hero Section (Minimal Edit) -->
+<section class="relative w-full h-[80vh] overflow-hidden flex items-center justify-center">
+<img alt="" class="absolute inset-0 w-full h-full object-cover" data-alt="Close-up of a minimalist handcrafted ceramic vase with organic textures, soft morning light hitting the sienna-colored clay surface in a serene studio setting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBJBsIw-_MP83fuhoUaVDxW3-onIJqNAwcK1ID-vHfEAdN-DzkWBHXTRuFR8EwQlocv5oeEcI5qob43GWRqV1vnnijFEBBC9h0Pw92pntPGPJ2bmzyg8YJ_2uUNKwStV7nLajYUHEaSKoOlXtH7V9ZVQyKhwnLFtM2bo0rAt0cIeXXQDBsRdXsvZQNvmnIEX0bkN5lZiaABiWfzzIO-IDeMCIrG1pmWWAMtK6xkd90dk3iwxH8L3F640css8aHEK5dFfr6FJFlrJ2zQ"/>
+<div class="absolute inset-0 bg-black/20"></div>
+<div class="relative text-center px-6 max-w-2xl">
+<h1 class="text-4xl md:text-6xl font-headline text-white drop-shadow-lg mb-4 leading-tight italic">Tierra y Fuego</h1>
+<p class="text-white/90 font-body text-sm md:text-base tracking-widest uppercase mb-10">Objetos con alma, nacidos del barro.</p>
+<div class="flex justify-center">
+<a class="bg-white/10 hover:bg-white/20 backdrop-blur-md text-white border border-white/30 px-8 py-3 rounded-md font-label uppercase tracking-widest text-[10px] font-bold transition-all" href="#">Explorar Colección</a>
+</div>
+</div>
+</section>
+<!-- Destacados: Curator List Pattern (Screen 13 Grid Layout) -->
+<section class="bg-surface-container-low py-32 px-8">
+<div class="max-w-screen-2xl mx-auto">
+<div class="flex justify-between items-end mb-20">
+<div class="max-w-xl">
+<h2 class="text-4xl font-headline leading-tight">Piezas Destacadas</h2>
+<p class="text-secondary mt-4 font-body leading-relaxed italic">Cada pieza es única, moldeada por la intención y el calor del horno.</p>
+</div>
+<a class="text-primary font-label text-sm border-b-2 border-primary/20 pb-1 hover:border-primary transition-all" href="#">Ver tienda completa</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-4 gap-x-12 gap-y-24">
+<!-- Product 1 -->
+<div class="flex flex-col space-y-6">
+<div class="aspect-[3/4] overflow-hidden rounded-lg bg-surface-container-highest shadow-sm">
+<img alt="" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" data-alt="Minimalist tall ceramic pitcher in matte sand finish, warm ambient lighting on a stone surface" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDBCpvFf1hHrLjVU-5Ti62c0_LAAbdAhk1qkMsHjWy2x41f-8mqaqDju4Pin61TCeyM0hAhNld_XQSCJZcm-V7MbPFTq0_03t97KqpBhBipH7JELOqIyw0z5lKU3Zt4L7Wyb_M_6DWz7tmd9vRa6Lk1F0OwA4X2NyBpw4gMTxaS9IpmBberAsiEVHmCnGOnpuStXB1pU-FwYFOz_xbudNLNGBrbzy1-FWf1dJWlrf7UtS06VHFIDfhPJhn03-s6JMbEJVhiuxV8r_H7"/>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-headline">Jarra Terra</h3>
+<p class="text-secondary/70 font-body text-sm">Gres esmaltado a mano</p>
+<p class="text-primary font-bold text-lg pt-2">$42.000</p>
+</div>
+<button class="bg-surface-container-highest text-on-surface py-3 rounded-md text-xs font-label uppercase tracking-widest hover:bg-surface-container transition-colors">Añadir al carrito</button>
+</div>
+<!-- Product 2 (Asymmetric shift from Screen 13) -->
+<div class="flex flex-col space-y-6 md:mt-12">
+<div class="aspect-[3/4] overflow-hidden rounded-lg bg-surface-container-highest shadow-sm">
+<img alt="" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" data-alt="Set of small ceramic tapas plates with speckled texture and deep terracotta rims" src="https://lh3.googleusercontent.com/aida-public/AB6AXuANPL3Pnp7-jeuyyYAmaKUQmtLRU2abINIFNYqU0-plFtaQ9NwbjLtmW8pofLdDnSaCkWC7bXJT6aiST3FfIE3PjKbG5xicrkKnkOINwLZVEYnU-9HjqiIvjxAnv7kQtybErando-Z-r23zyvGA6qsTLwFnI_prIf5JbDtsspm7FzfxIJ-qzMoPF0b7rgqgbNOAQWipmtKAJV8zVQsIPzu2w3OvJNnDLkR1OtLkuDDot2WvP_o5_rSQw3XZk6tbjVPD_My8xUg99ymj"/>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-headline">Set Aperitivo</h3>
+<p class="text-secondary/70 font-body text-sm">Colección Magma</p>
+<p class="text-primary font-bold text-lg pt-2">$38.500</p>
+</div>
+<button class="bg-surface-container-highest text-on-surface py-3 rounded-md text-xs font-label uppercase tracking-widest hover:bg-surface-container transition-colors">Añadir al carrito</button>
+</div>
+<!-- Product 3 -->
+<div class="flex flex-col space-y-6">
+<div class="aspect-[3/4] overflow-hidden rounded-lg bg-surface-container-highest shadow-sm">
+<img alt="" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" data-alt="Large organic-shaped ceramic fruit bowl in volcanic black glaze, dramatic lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAJnYvZabsg0ulE1MEOw0TJitSAmLaFeCmwtRAmz9FlAIR-9ZgCs6b7TZ_8taMahedt3aZhUjzOfYMM_sOxMMpsh5kAXdelBqwpKacy7_DYZskKLlMGu0Si4QdFE4rYw6p70uqQga8PGEDuHn8G1UE39D9F2xwmUa3l9GI1aAaSdK5KTPk8YVeReQhKmRUVmwfaIj2oJPlNBaS_VuLuNW945M_h8EG_pFf4ZPa_5QKj3qdtq7C2UXG-s-Q16VXewagTX5V6FBvIwm04"/>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-headline">Bowl Volcánico</h3>
+<p class="text-secondary/70 font-body text-sm">Serie Fuego Negro</p>
+<p class="text-primary font-bold text-lg pt-2">$55.000</p>
+</div>
+<button class="bg-surface-container-highest text-on-surface py-3 rounded-md text-xs font-label uppercase tracking-widest hover:bg-surface-container transition-colors">Añadir al carrito</button>
+</div>
+<!-- Product 4 (Asymmetric shift from Screen 13) -->
+<div class="flex flex-col space-y-6 md:mt-12">
+<div class="aspect-[3/4] overflow-hidden rounded-lg bg-surface-container-highest shadow-sm">
+<img alt="" class="w-full h-full object-cover hover:scale-105 transition-transform duration-500" data-alt="Sleek modern ceramic incense holder with minimal design and charcoal finish" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB_o9dcHCRPBoWsMB8mbiXZuWwRFjCTT1YTxbKLyoep9RlimPp3tA2JZyv8DLEFQHhyAh3R9-LweD3dmPLs_q8EHzAxKJJukTscxG8FoHEF43c6QsX9AvlKjdbmwT-sw5KvWmk0ldw-Qs6U05wMnvZN_BONBjIoiRmodM4FynpmRnFApqScpgfcuZ1f8Snp0hX-6vqx_e6AynL7bccohZtFXmZBPdg2lHkqVWdrLanLPlcP3OPkKgw7abFoSDMHeXOw5XHhmRmrlaa9"/>
+</div>
+<div class="space-y-2">
+<h3 class="text-xl font-headline">Porta Incienso Zen</h3>
+<p class="text-secondary/70 font-body text-sm">Detalle minimalista</p>
+<p class="text-primary font-bold text-lg pt-2">$18.900</p>
+</div>
+<button class="bg-surface-container-highest text-on-surface py-3 rounded-md text-xs font-label uppercase tracking-widest hover:bg-surface-container transition-colors">Añadir al carrito</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Categories Section (Renamed) -->
+<section class="py-24 px-8 max-w-screen-2xl mx-auto bg-surface">
+<div class="mb-16">
+<span class="text-primary font-label text-xs uppercase tracking-[0.3em]">Nuestra Esencia</span>
+<h2 class="text-4xl md:text-5xl font-headline mt-4 text-on-surface">Categorías</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-stretch">
+<!-- Large Category -->
+<div class="md:col-span-7 relative group overflow-hidden rounded-xl aspect-[4/5] md:aspect-auto h-[600px] bg-surface-container-low">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Elegant display of ceramic bowls on a wooden table, earthy tones, soft natural lighting, high-end editorial food photography style" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4U6xKxX_7dXpE5oP5SyZkWro6BvZ8pU5yr83boAnhB-2U5ZI9djKGloRJ2Ruqv5aRK8HOr0iy43VXgucmH8AXW0bvWxwuOlm81VdG80Jz4ONbSapl_Hryq1K8IwO9F2D7Ep6K-rDAMdzqwjorKNvtk1eq6lEoZd2nJD49Mk5WEt6Ff9OylusfgPp0TdrDL87VoPgXcUrjiOfg5mszJIPYHMs_wyqCsoHXyeo2eHt7KIX3bQg9BGPnYEyvJ8r8SvOtOSfjOhXV2SVg"/>
+<div class="absolute inset-0 image-overlay flex flex-col justify-end p-12">
+<h3 class="text-white text-3xl font-headline mb-2">Bowls</h3>
+<p class="text-white/80 font-body text-sm uppercase tracking-widest mb-6">Uso cotidiano, belleza perenne</p>
+<a class="text-white border-b border-white/30 self-start pb-1 text-sm tracking-widest hover:border-white transition-colors" href="#">VER TODO</a>
+</div>
+</div>
+<!-- Column of smaller ones -->
+<div class="md:col-span-5 flex flex-col gap-8">
+<div class="relative group overflow-hidden rounded-xl h-[284px] bg-surface-container-low">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Close-up of minimalist ceramic mugs with textured glazes, organized neatly in a sunlit kitchen corner" src="https://lh3.googleusercontent.com/aida-public/AB6AXuChnd4h7rLQSJMK9Gc20EVs4iVyaUvj6UHs44gehvS1I5Db88zduCHOKm8yuRxZjQG_DGPC1v__jPs_iEfRTz8TEpOhI1sw4ziKj0H7o2BfCZIZO4t7oIne5NEkcEDqLMMtAjp0aBJVHM85ZbBAH57cAKc4lYvrh5ltfH6S-2uOyFv0jWPXWe2DUAfB-mOnJx147UJP9QiUCGgDew392qMhQUhzW3Z_LbFgRBw7Fp5D_Jif6smRb-PE1uZ5NsKeqUWzOnzfbgox5N2N"/>
+<div class="absolute inset-0 image-overlay flex flex-col justify-end p-8">
+<h3 class="text-white text-2xl font-headline">Tazas</h3>
+<a class="text-white/80 text-xs tracking-widest mt-2" href="#">EXPLORAR</a>
+</div>
+</div>
+<div class="relative group overflow-hidden rounded-xl flex-grow bg-surface-container-low">
+<img alt="" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" data-alt="Abstract ceramic decorative pieces on a plinth, soft shadows, neutral background, art gallery aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD9eR1KwAjVa2OOYxEiB6CF3BCxMokkg-RqcvBJKHJVW9KCDaxc4zS-J4u7PbLYrwjP4AuamZ7dnL7OCgg-r7BmvkqOfW-vN-tnrPFuTdAgXyapnzO3pQX4_2Ihp99CFweNanqFKbClHAaZv7IlfjIX_VQWmlS154lkiZaI_-0IcLhTuPha0iS2UXmUyTb_pfVQVWFtlWq_akwqTGp8oJUk5kNtgRqAVfHfvmQ66-7pDF4KG2sfrmyDj84BFTiLYB62kSle0e-o0UuW"/>
+<div class="absolute inset-0 image-overlay flex flex-col justify-end p-8">
+<h3 class="text-white text-2xl font-headline">Decoración</h3>
+<a class="text-white/80 text-xs tracking-widest mt-2" href="#">EXPLORAR</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Taller Section -->
+<section class="py-24 bg-surface">
+<div class="max-w-screen-xl mx-auto px-8">
+<div class="bg-surface-container rounded-3xl overflow-hidden flex flex-col md:flex-row items-center">
+<div class="md:w-1/2 p-12 md:p-20 space-y-8">
+<span class="text-primary font-label text-xs uppercase tracking-[0.3em]">Experiencias</span>
+<h2 class="text-4xl md:text-5xl font-headline leading-tight text-on-surface">Talleres de barro y calma</h2>
+<p class="text-on-surface-variant font-body leading-relaxed text-lg">
+                            Regálate un momento para conectar con tus manos. En nuestros talleres presenciales aprenderás las técnicas básicas del modelado manual en un entorno tranquilo y acogedor.
+                        </p>
+<ul class="space-y-4 pt-4">
+<li class="flex items-center gap-4 text-secondary">
+<span class="material-symbols-outlined text-primary" data-icon="event">event</span>
+<span class="text-sm uppercase tracking-widest">Sábados de 10:00 a 13:00</span>
+</li>
+<li class="flex items-center gap-4 text-secondary">
+<span class="material-symbols-outlined text-primary" data-icon="location_on">location_on</span>
+<span class="text-sm uppercase tracking-widest">Estudio Palermo, BA</span>
+</li>
+</ul>
+<div class="pt-8">
+<a class="keramic-gradient text-on-primary px-8 py-4 rounded-md font-label uppercase tracking-widest text-xs font-bold inline-block hover:shadow-lg transition-all" href="#">Reservar mi lugar</a>
+</div>
+</div>
+<div class="md:w-1/2 w-full h-[500px] md:h-[700px]">
+<img alt="" class="w-full h-full object-cover" data-alt="Hands covered in light clay working on a pottery wheel, focus on fingers shaping the bowl, warm workshop lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCJFl7F3p9FUT7HlNzTzo30IvG9GnpX5Z9oqQ3VfTUGKRxiaEhchlEH-WWlC2-MYIM_BlpmJJNMWvLxYSXFCQ4m6FmsxnoGuiyIMIp0RyYYP4xmcu8DV3aZDfvOYagF2eajR_8bLuDKRwodn0SSWAcGMFRpBnsKLTJ62PhmJD95sVBAIHMsK_gueewCTStdiibNRIZEcPX8BtYLnKOQP_7xuvv78F0MG6RXy7F88G7LaLZAvY_zgy5dUySuctcsJYMRuhk1s27uwc_-"/>
+</div>
+</div>
+</div>
+</section>
+<!-- Mayoristas Section -->
+<section class="py-32 bg-surface-container-highest">
+<div class="max-w-5xl mx-auto px-8 text-center">
+<div class="space-y-6">
+<span class="material-symbols-outlined text-4xl text-primary mb-4" data-icon="store">store</span>
+<h2 class="text-4xl md:text-5xl font-headline text-on-surface">MAGMA en tu espacio</h2>
+<p class="text-secondary font-body text-lg max-w-2xl mx-auto leading-relaxed">
+                        Colaboramos con restaurantes, hoteles y tiendas de diseño que buscan piezas con alma. Ofrecemos catálogos personalizados para pedidos mayoristas y desarrollos especiales.
+                    </p>
+<div class="pt-10">
+<button class="bg-primary text-on-primary px-12 py-5 rounded-md font-label uppercase tracking-[0.2em] text-xs font-bold hover:scale-105 transition-transform flex items-center gap-4 mx-auto">
+                            Descargar Catálogo 2024
+                            <span class="material-symbols-outlined text-sm" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="bg-[#f0ede8] dark:bg-stone-950 w-full py-16 px-12 mt-20">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-7xl mx-auto">
+<!-- Brand & Info -->
+<div class="space-y-6">
+<div class="text-lg font-noto-serif italic text-[#745949]">MAGMA CERÁMICA</div>
+<p class="text-[#745949] dark:text-stone-500 font-manrope text-sm leading-relaxed max-w-xs">
+                    Piezas cerámicas que cuentan historias de tierra y tiempo. Creadas artesanalmente en nuestro estudio.
+                </p>
+<div class="flex space-x-4">
+<a class="text-[#745949] hover:text-[#8a3b2d] transition-colors" href="#"><span class="material-symbols-outlined" data-icon="share">share</span></a>
+<a class="text-[#745949] hover:text-[#8a3b2d] transition-colors" href="#"><span class="material-symbols-outlined" data-icon="mail">mail</span></a>
+</div>
+</div>
+<!-- Links -->
+<div class="grid grid-cols-2 gap-8">
+<div class="flex flex-col space-y-4">
+<span class="text-on-surface font-label text-xs uppercase tracking-widest font-bold mb-2">Comprar</span>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Tazas</a>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Bowls</a>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Platos</a>
+</div>
+<div class="flex flex-col space-y-4">
+<span class="text-on-surface font-label text-xs uppercase tracking-widest font-bold mb-2">Comunidad</span>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Contacto</a>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Envíos</a>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Términos</a>
+<a class="text-[#745949] dark:text-stone-500 text-sm hover:opacity-70 transition-opacity" href="#">Privacidad</a>
+</div>
+</div>
+<!-- Newsletter -->
+<div class="space-y-6">
+<span class="text-on-surface font-label text-xs uppercase tracking-widest font-bold">Suscríbete</span>
+<p class="text-[#745949] dark:text-stone-500 text-sm">Recibe noticias de nuevos lanzamientos y talleres.</p>
+<div class="flex">
+<input class="bg-surface-container-high border-none text-sm w-full py-3 px-4 focus:ring-1 focus:ring-primary rounded-l-md outline-none" placeholder="Email" type="email"/>
+<button class="bg-[#8a3b2d] text-white px-4 rounded-r-md hover:bg-[#a85243] transition-colors">
+<span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<div class="max-w-7xl mx-auto mt-16 pt-8 border-t border-[#745949]/10 flex flex-col md:flex-row justify-between items-center text-[#745949] dark:text-stone-500 text-xs tracking-wide">
+<div>© 2024 MAGMA CERÁMICA. Hecho a mano con tierra y fuego.</div>
+<div class="mt-4 md:mt-0 flex gap-6">
+<span>Buenos Aires, Argentina</span>
+<span>Instagram</span>
+<span>Pinterest</span>
+</div>
+</div>
+</footer>
+</body></html>
