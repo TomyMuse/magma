@@ -489,11 +489,23 @@
         margin-top: 1.5rem;
       }
 
+      .dashboard-row {
+        display: grid;
+        grid-template-columns: repeat(4, 125px) 1fr;
+        gap: 0.75rem;
+        margin-top: 1rem;
+        overflow-x: auto;
+      }
+
       .dashboard-card {
         background: #fff;
         border-radius: 1rem;
         padding: 1.25rem;
         box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+      }
+
+      .dashboard-card.compact {
+        min-width: 0;
       }
 
       .dashboard-card.wide {
@@ -866,9 +878,18 @@
           padding-bottom: 0.5rem;
         }
 
-        .dashboard-grid {
+.dashboard-grid {
           grid-template-columns: 125px 1fr;
           gap: 0.75rem;
+        }
+
+        .dashboard-card.wide {
+          grid-column: auto;
+        }
+
+        .dashboard-row {
+          grid-template-columns: repeat(4, 125px) 1fr;
+          overflow-x: auto;
         }
 
         .dashboard-card.wide {
@@ -1496,8 +1517,8 @@
             </article>
           </section>
 
-          <div class="dashboard-grid">
-            <div class="dashboard-card wide">
+          <div class="dashboard-row">
+            <div class="dashboard-card compact">
               <div class="card-header">
                 <h3>Pedidos recientes</h3>
                 <a href="#" onclick="showView('orders')" style="font-size: 0.75rem; color: var(--primary);">Ver todos →</a>
@@ -1533,25 +1554,26 @@
                 </div>
               </div>
             </div>
+          </div>
 
-            <div class="dashboard-card wide">
-              <div class="card-header">
-                <h3>Ventas ultimos 7 dias</h3>
-                <span class="badge">+18%</span>
-              </div>
-              <div class="mini-chart">
-                <div class="chart-bar" style="height: 45%"></div>
-                <div class="chart-bar" style="height: 62%"></div>
-                <div class="chart-bar" style="height: 38%"></div>
-                <div class="chart-bar" style="height: 75%"></div>
-                <div class="chart-bar" style="height: 55%"></div>
-                <div class="chart-bar" style="height: 88%"></div>
-                <div class="chart-bar" style="height: 70%"></div>
-              </div>
-              <div class="chart-labels">
-                <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
-              </div>
+          <div class="dashboard-card wide">
+            <div class="card-header">
+              <h3>Ventas ultimos 7 dias</h3>
+              <span class="badge">+18%</span>
             </div>
+            <div class="mini-chart">
+              <div class="chart-bar" style="height: 45%"></div>
+              <div class="chart-bar" style="height: 62%"></div>
+              <div class="chart-bar" style="height: 38%"></div>
+              <div class="chart-bar" style="height: 75%"></div>
+              <div class="chart-bar" style="height: 55%"></div>
+              <div class="chart-bar" style="height: 88%"></div>
+              <div class="chart-bar" style="height: 70%"></div>
+            </div>
+            <div class="chart-labels">
+              <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
+            </div>
+          </div>
 
             <div class="dashboard-card">
               <div class="card-header">
