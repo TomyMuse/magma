@@ -861,7 +861,18 @@
         }
 
         .stats-row {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(4, 125px);
+          overflow-x: auto;
+          padding-bottom: 0.5rem;
+        }
+
+        .dashboard-grid {
+          grid-template-columns: 125px 1fr;
+          gap: 0.75rem;
+        }
+
+        .dashboard-card.wide {
+          grid-column: auto;
         }
 
         .products-grid {
