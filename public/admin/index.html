@@ -168,6 +168,19 @@
         color: var(--text);
       }
 
+      .sidebar.mobile-open {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        z-index: 100;
+        width: 280px;
+        padding: 1.5rem;
+        background: var(--surface-low);
+        border-right: 1px solid var(--surface-high);
+        box-shadow: 4px 0 20px rgba(0,0,0,0.1);
+      }
+
       .search {
         flex: 1;
         max-width: 420px;
@@ -433,6 +446,203 @@
         font-size: 0.72rem;
         color: var(--muted);
         margin-top: 0.2rem;
+      }
+
+      .stat-card .note.positive { color: #1e7e34; }
+      .stat-card .note.warning { color: #b08800; }
+
+      .stat-card.highlight {
+        border-left: 4px solid var(--primary);
+      }
+
+      .dashboard-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        margin-top: 1.5rem;
+      }
+
+      .dashboard-card {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 1.25rem;
+        box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+      }
+
+      .dashboard-card.full-width {
+        grid-column: span 2;
+      }
+
+      .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+
+      .card-header h3 {
+        margin: 0;
+        font-size: 0.95rem;
+        font-family: "Noto Serif", serif;
+      }
+
+      .badge {
+        background: #e6f4ea;
+        color: #1e7e34;
+        font-size: 0.7rem;
+        font-weight: 700;
+        padding: 0.2rem 0.5rem;
+        border-radius: 999px;
+      }
+
+      .mini-chart {
+        display: flex;
+        align-items: flex-end;
+        gap: 0.5rem;
+        height: 80px;
+        padding: 0 0.5rem;
+      }
+
+      .chart-bar {
+        flex: 1;
+        background: linear-gradient(180deg, var(--primary-2), var(--primary));
+        border-radius: 0.3rem 0.3rem 0 0;
+        opacity: 0.8;
+      }
+
+      .chart-labels {
+        display: flex;
+        justify-content: space-between;
+        font-size: 0.65rem;
+        color: var(--muted);
+        margin-top: 0.5rem;
+      }
+
+      .recent-list {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .recent-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.5rem;
+        background: var(--surface-low);
+        border-radius: 0.6rem;
+      }
+
+      .recent-item div {
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .recent-item strong {
+        font-size: 0.85rem;
+      }
+
+      .recent-item span {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .status-dot {
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+      }
+
+      .status-dot.pending { background: #b08800; }
+      .status-dot.shipped { background: #c5221f; }
+      .status-dot.delivered { background: #1e7e34; }
+
+      .status-pill {
+        font-size: 0.65rem;
+        padding: 0.2rem 0.4rem;
+        border-radius: 999px;
+        background: var(--surface-container);
+        color: var(--muted);
+      }
+
+      .status-pill.new {
+        background: #fef7e0;
+        color: #b08800;
+      }
+
+      .product-list {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .product-item {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.5rem;
+        background: var(--surface-low);
+        border-radius: 0.6rem;
+      }
+
+      .product-item img {
+        width: 40px;
+        height: 40px;
+        border-radius: 0.4rem;
+        object-fit: cover;
+      }
+
+      .product-item div {
+        flex: 1;
+        display: grid;
+        gap: 0.1rem;
+      }
+
+      .product-item strong {
+        font-size: 0.85rem;
+      }
+
+      .product-item span {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      .product-item .pill {
+        font-size: 0.6rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-weight: 700;
+        padding: 0.2rem 0.4rem;
+        border-radius: 999px;
+        background: #ead9cf;
+        color: #6b3f35;
+      }
+
+      .finance-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+      }
+
+      .finance-item {
+        text-align: center;
+        padding: 0.75rem;
+        background: var(--surface-low);
+        border-radius: 0.6rem;
+      }
+
+      .finance-item.total {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .finance-item.small {
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      .finance-item .value {
+        font-size: 1.3rem;
+        font-weight: 800;
+        margin-top: 0.3rem;
       }
 
       .modal {
@@ -1170,7 +1380,7 @@
 
         <nav class="menu" aria-label="Navegacion del panel">
           <button type="button" onclick="showView('dashboard')">Dashboard</button>
-          <button type="button" class="active" onclick="showView('products')">Productos</button>
+          <button type="button" class="active" onclick="showView('dashboard')">Dashboard</button>
           <button type="button" onclick="showView('orders')">Pedidos</button>
           <button type="button" onclick="showView('wholesale')">Mayoristas</button>
           <button type="button" onclick="showView('workshops')">Talleres</button>
@@ -1181,11 +1391,6 @@
           <a href="../../index.html">Ver tienda publica</a>
         </div>
       </aside>
-
-      <div class="mobile-header">
-        <span class="mobile-brand">Magma Panel de Admin</span>
-        <button type="button" class="menu-toggle" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
-      </div>
 
       <main class="main">
         <header class="topbar">
@@ -1199,19 +1404,22 @@
         </header>
 
         <!-- DASHBOARD VIEW -->
-        <div id="view-dashboard" class="view">
+        <div id="view-dashboard" class="view active">
           <section class="section-header">
             <div>
               <h1>Dashboard</h1>
               <p class="subtitle">Resumen de tu negocio</p>
             </div>
+            <div style="display: flex; gap: 0.5rem; align-items: center;">
+              <span style="font-size: 0.8rem; color: var(--muted);">Hoy: <strong id="todayDate"></strong></span>
+            </div>
           </section>
 
           <section class="stats-row">
-            <article class="stat-card">
+            <article class="stat-card highlight">
               <small>Ventas del mes</small>
               <p class="value">$2.480.300</p>
-              <p class="note">+12% vs mes anterior</p>
+              <p class="note positive">↑ 12% vs mes anterior</p>
             </article>
             <article class="stat-card">
               <small>Pedidos activos</small>
@@ -1221,18 +1429,162 @@
             <article class="stat-card">
               <small>Productos en stock</small>
               <p class="value">24</p>
-              <p class="note">3 con stock bajo</p>
+              <p class="note warning">3 con stock bajo</p>
             </article>
             <article class="stat-card">
-              <small>Cupos talleres</small>
-              <p class="value">7</p>
-              <p class="note">Ultimos lugares de abril</p>
+              <small>Alumnos talleres</small>
+              <p class="value">12</p>
+              <p class="note">4 pagos pendientes</p>
             </article>
           </section>
+
+          <div class="dashboard-grid">
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3>Ventas последние 7 dias</h3>
+                <span class="badge">+18%</span>
+              </div>
+              <div class="mini-chart">
+                <div class="chart-bar" style="height: 45%"></div>
+                <div class="chart-bar" style="height: 62%"></div>
+                <div class="chart-bar" style="height: 38%"></div>
+                <div class="chart-bar" style="height: 75%"></div>
+                <div class="chart-bar" style="height: 55%"></div>
+                <div class="chart-bar" style="height: 88%"></div>
+                <div class="chart-bar" style="height: 70%"></div>
+              </div>
+              <div class="chart-labels">
+                <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3>Pedidos recientes</h3>
+                <a href="#" onclick="showView('orders')" style="font-size: 0.75rem; color: var(--primary);">Ver todos →</a>
+              </div>
+              <div class="recent-list">
+                <div class="recent-item">
+                  <div>
+                    <strong>#MG-1032</strong>
+                    <span>Elena H.</span>
+                  </div>
+                  <span class="status-dot pending"></span>
+                </div>
+                <div class="recent-item">
+                  <div>
+                    <strong>#MG-1031</strong>
+                    <span>Julian B.</span>
+                  </div>
+                  <span class="status-dot shipped"></span>
+                </div>
+                <div class="recent-item">
+                  <div>
+                    <strong>#MG-1030</strong>
+                    <span>Sofia C.</span>
+                  </div>
+                  <span class="status-dot pending"></span>
+                </div>
+                <div class="recent-item">
+                  <div>
+                    <strong>#MG-1029</strong>
+                    <span>Lucas M.</span>
+                  </div>
+                  <span class="status-dot delivered"></span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3>Productos mas vendidos</h3>
+                <a href="#" onclick="showView('products')" style="font-size: 0.75rem; color: var(--primary);">Ver inventario →</a>
+              </div>
+              <div class="product-list">
+                <div class="product-item">
+                  <img src="../../625262061_18034343237765495_6938131803006591943_n.jpeg" alt="Bowl Orbit" />
+                  <div>
+                    <strong>Bowl Orbit</strong>
+                    <span>32 vendidos</span>
+                  </div>
+                  <span class="pill">Top</span>
+                </div>
+                <div class="product-item">
+                  <img src="../../SaveClip.App_649699739_17993652941920685_3240829447011146932_n.jpg" alt="Set Tazas" />
+                  <div>
+                    <strong>Set Tazas Bosco</strong>
+                    <span>21 vendidos</span>
+                  </div>
+                  <span class="pill">Top</span>
+                </div>
+                <div class="product-item">
+                  <img src="../../655439254_18104990270499726_1504171754844047591_n.jpeg" alt="Bowl Laguna" />
+                  <div>
+                    <strong>Bowl Laguna</strong>
+                    <span>18 vendidos</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card">
+              <div class="card-header">
+                <h3>Solicitudes mayoristas</h3>
+                <a href="#" onclick="showView('wholesale')" style="font-size: 0.75rem; color: var(--primary);">Ver todas →</a>
+              </div>
+              <div class="recent-list">
+                <div class="recent-item">
+                  <div>
+                    <strong>Carlos Rodriguez</strong>
+                    <span>Casa Living</span>
+                  </div>
+                  <span class="status-pill new">Nuevo</span>
+                </div>
+                <div class="recent-item">
+                  <div>
+                    <strong>Ana Martinez</strong>
+                    <span>Design Studio</span>
+                  </div>
+                  <span class="status-pill">Contactado</span>
+                </div>
+                <div class="recent-item">
+                  <div>
+                    <strong>Pedro Gonzalez</strong>
+                    <span>Hotel Boutique</span>
+                  </div>
+                  <span class="status-pill new">Nuevo</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card full-width">
+              <div class="card-header">
+                <h3>Resumen financiero del mes</h3>
+              </div>
+              <div class="finance-grid">
+                <div class="finance-item">
+                  <small>Ingresos por ventas</small>
+                  <p class="value">$2.480.300</p>
+                </div>
+                <div class="finance-item">
+                  <small>Ingresos por talleres</small>
+                  <p class="value">$300.000</p>
+                </div>
+                <div class="finance-item">
+                  <small>Mayoristas (potencial)</small>
+                  <p class="value">$580.000</p>
+                </div>
+                <div class="finance-item total">
+                  <small>Total estimado</small>
+                  <p class="value">$3.360.300</p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- PRODUCTS VIEW -->
-        <div id="view-products" class="view active">
+        <div id="view-products" class="view">
           <section class="section-header">
             <div>
               <h1>Productos</h1>
@@ -2062,23 +2414,41 @@
 
       function toggleMobileMenu() {
         const sidebar = document.querySelector(".sidebar");
-        if (sidebar.style.display === "flex") {
-          sidebar.style.display = "none";
+        if (sidebar.classList.contains("mobile-open")) {
+          sidebar.classList.remove("mobile-open");
+          sidebar.style.display = "";
         } else {
           sidebar.style.display = "flex";
-          sidebar.style.position = "fixed";
-          sidebar.style.top = "0";
-          sidebar.style.left = "0";
-          sidebar.style.height = "100vh";
-          sidebar.style.zIndex = "100";
-          sidebar.style.width = "240px";
-          sidebar.style.padding = "1.2rem";
-          sidebar.style.background = "var(--surface-low)";
-          sidebar.style.borderRight = "1px solid var(--surface-high)";
+          sidebar.classList.add("mobile-open");
+          sidebar.innerHTML = `
+            <button type="button" onclick="toggleMobileMenu()" style="position: absolute; top: 1rem; right: 1rem; width: 32px; height: 32px; border: 0; background: transparent; font-size: 1.5rem; cursor: pointer;">✕</button>
+            <a class="brand" href="../../index.html" aria-label="Volver al sitio">
+              <img src="../../logo.png" alt="Logo Magma" />
+              <div>
+                <strong>Magma</strong>
+                <span>Panel Admin</span>
+              </div>
+            </a>
+            <nav class="menu" aria-label="Navegacion del panel">
+              <button type="button" class="active" onclick="showView('dashboard')">Dashboard</button>
+              <button type="button" onclick="showView('products')">Productos</button>
+              <button type="button" onclick="showView('orders')">Pedidos</button>
+              <button type="button" onclick="showView('wholesale')">Mayoristas</button>
+              <button type="button" onclick="showView('workshops')">Talleres</button>
+              <button type="button" onclick="showView('settings')">Ajustes</button>
+            </nav>
+            <div class="sidebar-footer">
+              <a href="../../index.html">Ver tienda publica</a>
+            </div>
+          `;
         }
       }
 
       // Initialize
+      const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+      const today = new Date();
+      document.getElementById("todayDate").textContent = `${today.getDate()} de ${months[today.getMonth()]}`;
+      
       renderProducts();
       renderOrders();
       renderWholesale();
