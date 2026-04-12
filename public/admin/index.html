@@ -861,7 +861,7 @@
         }
       }
 
-      @media (max-width: 640px) {
+@media (max-width: 640px) {
         .main {
           padding: 1rem;
         }
@@ -876,15 +876,22 @@
           font-size: 1.5rem;
         }
 
-.stats-row {
-          grid-template-columns: repeat(4, 125px);
+        .stats-row {
+          display: flex;
           overflow-x: auto;
-          padding-bottom: 0.5rem;
+          gap: 0.5rem;
+          padding-bottom: 0.75rem;
+        }
+
+        .stats-row .stat-card,
+        .stats-row .pedidos-side {
+          min-width: 125px;
+          flex-shrink: 0;
         }
 
         .stats-row .pedidos-side {
+          min-width: 140px;
           display: block;
-          min-width: 0;
         }
 
         .dashboard-grid {
