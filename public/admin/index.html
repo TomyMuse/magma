@@ -510,7 +510,7 @@
         border-top: 1px solid var(--surface-high);
       }
 
-      @media (max-width: 900px) {
+      @media (max-width: 1024px) {
         .layout {
           grid-template-columns: 1fr;
         }
@@ -519,26 +519,134 @@
           display: none;
         }
 
+        .topbar {
+          flex-direction: column;
+          align-items: stretch;
+          gap: 0.75rem;
+        }
+
+        .topbar .search {
+          max-width: 100%;
+        }
+
+        .top-actions {
+          justify-content: flex-end;
+        }
+
         .stats-row {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(2, 1fr);
         }
 
         .products-grid {
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .workshop-stats {
+          grid-template-columns: repeat(2, 1fr);
+        }
+
+        .settings-grid {
+          grid-template-columns: 1fr;
         }
       }
 
-      @media (max-width: 600px) {
+      @media (max-width: 640px) {
+        .main {
+          padding: 1rem;
+        }
+
+        .section-header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 1rem;
+        }
+
+        .section-header h1 {
+          font-size: 1.5rem;
+        }
+
         .stats-row {
           grid-template-columns: 1fr;
         }
 
         .products-grid {
           grid-template-columns: 1fr;
+          gap: 1rem;
         }
 
-        .form-row {
+        .filters {
+          overflow-x: auto;
+          padding-bottom: 0.5rem;
+          flex-wrap: nowrap;
+        }
+
+        .filter-btn {
+          flex-shrink: 0;
+          padding: 0.4rem 0.75rem;
+          font-size: 0.7rem;
+        }
+
+        .orders-table-wrapper,
+        .wholesale-table-wrapper,
+        .students-table-wrapper {
+          overflow-x: auto;
+        }
+
+        .orders-table,
+        .wholesale-table,
+        .students-table {
+          min-width: 600px;
+        }
+
+        .workshop-stats {
           grid-template-columns: 1fr;
+        }
+
+        .workshop-config {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+
+        .workshop-config input {
+          width: 100%;
+        }
+
+        .status-select {
+          font-size: 0.65rem;
+          padding: 0.25rem;
+        }
+
+        .product-actions {
+          flex-direction: column;
+        }
+
+        .product-actions button {
+          font-size: 0.65rem;
+          padding: 0.35rem;
+        }
+
+        .settings-section {
+          padding: 1rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        .main {
+          padding: 0.75rem;
+        }
+
+        .stat-card .value {
+          font-size: 1.4rem;
+        }
+
+        .btn {
+          padding: 0.6rem 1rem;
+          font-size: 0.7rem;
+        }
+
+        .search {
+          font-size: 0.85rem;
+          padding: 0.5rem 0.75rem;
         }
       }
 
@@ -817,6 +925,27 @@
         margin-bottom: 1.5rem;
       }
 
+      .workshop-config {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .workshop-config label {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: var(--secondary);
+      }
+
+      .workshop-config input {
+        padding: 0.5rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 0.5rem;
+        width: 120px;
+        font-size: 0.9rem;
+      }
+
       .workshop-stats .stat-card {
         background: #fff;
         border-radius: 0.8rem;
@@ -1017,11 +1146,11 @@
 
       <main class="main">
         <header class="topbar">
-          <input class="search" type="search" placeholder="Buscar producto, orden o cliente..." />
+          <input class="search" type="search" id="globalSearch" placeholder="Buscar en todo el panel..." oninput="handleGlobalSearch(this.value)" />
           <div class="top-actions">
-            <button type="button" aria-label="Notificaciones">N</button>
-            <button type="button" aria-label="Mensajes">M</button>
-            <button type="button" aria-label="Perfil">A</button>
+            <button type="button" class="icon-btn" aria-label="Actualizar" onclick="refreshData()">🔄</button>
+            <button type="button" class="icon-btn" aria-label="Notificaciones">🔔</button>
+            <button type="button" class="icon-btn" aria-label="Perfil">👤</button>
           </div>
         </header>
 
@@ -1163,9 +1292,9 @@
             <button class="btn btn-primary" onclick="openWorkshopModal()">+ Agregar alumno</button>
           </section>
 
-          <div class="workshop-config" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
-            <label style="font-size: 0.85rem; font-weight: 600;">Valor del mes:</label>
-            <input type="number" id="workshopPrice" value="25000" style="padding: 0.5rem; border: 1px solid var(--surface-high); border-radius: 0.5rem; width: 120px; font-size: 0.9rem;" onchange="renderStudents()" />
+          <div class="workshop-config">
+            <label>Valor del mes:</label>
+            <input type="number" id="workshopPrice" value="25000" onchange="renderStudents()" />
           </div>
 
           <div class="workshop-stats">
@@ -1838,6 +1967,53 @@
         
         students.push(newStudent);
         renderStudents();
+      }
+
+      // GLOBAL SEARCH
+      function handleGlobalSearch(query) {
+        const q = query.toLowerCase().trim();
+        if (!q) {
+          showView(document.querySelector(".menu .active").textContent.toLowerCase());
+          return;
+        }
+
+        // Search in current view
+        if (document.getElementById("view-products").classList.contains("active")) {
+          const filtered = products.filter(p => p.name.toLowerCase().includes(q) || p.description.toLowerCase().includes(q));
+          const grid = document.getElementById("productsGrid");
+          grid.innerHTML = filtered.map(product => {
+            const stockClass = product.stock === 0 ? "out" : product.stock < 5 ? "low" : "in";
+            const stockLabel = product.stock === 0 ? "Sin stock" : product.stock < 5 ? `Stock bajo (${product.stock})` : `${product.stock} disponibles`;
+            return `
+              <article class="product-card">
+                <div class="product-image">
+                  <img src="${product.image}" alt="${product.name}" />
+                </div>
+                <div class="product-info">
+                  <h3>${product.name}</h3>
+                  <p class="product-meta">${product.description}</p>
+                  <p class="product-price">$${product.price.toLocaleString("es-AR")}</p>
+                  <div class="product-stock">
+                    <span class="stock-badge ${stockClass}">${stockLabel}</span>
+                  </div>
+                  <div class="product-actions">
+                    <button onclick="editProduct(${product.id})">Editar</button>
+                    <button class="danger" onclick="deleteProduct(${product.id})">Eliminar</button>
+                  </div>
+                </div>
+              </article>
+            `;
+          }).join("");
+        }
+      }
+
+      function refreshData() {
+        renderProducts();
+        renderOrders();
+        renderWholesale();
+        renderStudents();
+        document.getElementById("globalSearch").value = "";
+        alert("Datos actualizados");
       }
 
       // Initialize
