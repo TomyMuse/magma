@@ -549,6 +549,142 @@
       .view.active {
         display: block;
       }
+
+      .orders-table-wrapper {
+        background: #fff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+      }
+
+      .orders-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .orders-table th {
+        text-align: left;
+        padding: 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        background: var(--surface-low);
+        border-bottom: 1px solid var(--surface-high);
+      }
+
+      .orders-table td {
+        padding: 1rem;
+        font-size: 0.85rem;
+        border-bottom: 1px solid var(--surface-low);
+        vertical-align: middle;
+      }
+
+      .orders-table tr:hover {
+        background: var(--surface-low);
+      }
+
+      .order-id {
+        font-weight: 700;
+        color: var(--primary);
+      }
+
+      .order-products {
+        display: flex;
+        gap: 0.3rem;
+        flex-wrap: wrap;
+      }
+
+      .order-product-thumb {
+        width: 32px;
+        height: 32px;
+        border-radius: 0.4rem;
+        object-fit: cover;
+      }
+
+      .order-total {
+        font-weight: 700;
+      }
+
+      .order-date {
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+
+      .order-actions {
+        display: flex;
+        gap: 0.4rem;
+      }
+
+      .order-actions button {
+        padding: 0.35rem 0.6rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 0.4rem;
+        background: #fff;
+        font-family: inherit;
+        font-size: 0.7rem;
+        cursor: pointer;
+        transition: all 160ms;
+      }
+
+      .order-actions button:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .order-status {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.35rem;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+
+      .order-status.pending {
+        background: #fef7e0;
+        color: #b08800;
+      }
+
+      .order-status.production {
+        background: #e8f0fe;
+        color: #1967d2;
+      }
+
+      .order-status.ready {
+        background: #e6f4ea;
+        color: #1e7e34;
+      }
+
+      .order-status.shipped {
+        background: #fce8e6;
+        color: #c5221f;
+      }
+
+      .order-status.delivered {
+        background: var(--surface-container);
+        color: var(--text);
+      }
+
+      .status-dot {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: currentColor;
+      }
+
+      .empty-state {
+        text-align: center;
+        padding: 3rem;
+        color: var(--muted);
+      }
+
+      .empty-state p {
+        margin: 0;
+        font-size: 0.9rem;
+      }
     </style>
   </head>
   <body>
@@ -642,15 +778,43 @@
           </div>
         </div>
 
-        <!-- OTHER VIEWS -->
+        <!-- ORDERS VIEW -->
         <div id="view-orders" class="view">
           <section class="section-header">
             <div>
               <h1>Pedidos</h1>
-              <p class="subtitle">Seguimiento de ordenes</p>
+              <p class="subtitle">Seguimiento y gestion de ordenes</p>
             </div>
+            <button class="btn btn-primary" onclick="openOrderModal()">+ Nuevo pedido</button>
           </section>
-          <p style="color: var(--muted)">Vista de pedidos en desarrollo...</p>
+
+          <div class="filters">
+            <button class="filter-btn active" onclick="filterOrders('all')">Todos</button>
+            <button class="filter-btn" onclick="filterOrders('pending')">Pendientes</button>
+            <button class="filter-btn" onclick="filterOrders('production')">Produccion</button>
+            <button class="filter-btn" onclick="filterOrders('ready')">Listos</button>
+            <button class="filter-btn" onclick="filterOrders('shipped')">Despachados</button>
+            <button class="filter-btn" onclick="filterOrders('delivered')">Entregados</button>
+          </div>
+
+          <div class="orders-table-wrapper">
+            <table class="orders-table">
+              <thead>
+                <tr>
+                  <th>ID</th>
+                  <th>Cliente</th>
+                  <th>Productos</th>
+                  <th>Total</th>
+                  <th>Estado</th>
+                  <th>Fecha</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="ordersTableBody">
+                <!-- Orders will be rendered here -->
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div id="view-wholesale" class="view">
@@ -877,8 +1041,108 @@
         renderProducts();
       }
 
+      // ORDERS
+      const orders = [
+        { id: "MG-1032", client: "Elena H.", products: [products[0], products[2]], total: 75700, status: "production", date: "2026-04-10" },
+        { id: "MG-1031", client: "Julian B.", products: [products[1]], total: 58000, status: "shipped", date: "2026-04-09" },
+        { id: "MG-1030", client: "Sofia C.", products: [products[0]], total: 39500, status: "pending", date: "2026-04-09" },
+        { id: "MG-1029", client: "Lucas M.", products: [products[3], products[4]], total: 85800, status: "delivered", date: "2026-04-08" },
+        { id: "MG-1028", client: "Martina R.", products: [products[5]], total: 52200, status: "ready", date: "2026-04-08" },
+        { id: "MG-1027", client: "Tomás K.", products: [products[7]], total: 46800, status: "production", date: "2026-04-07" },
+        { id: "MG-1026", client: "Valentina L.", products: [products[0], products[1]], total: 97500, status: "delivered", date: "2026-04-06" },
+        { id: "MG-1025", client: "Bruno P.", products: [products[2]], total: 36200, status: "shipped", date: "2026-04-05" },
+      ];
+
+      let ordersFilter = "all";
+
+      function renderOrders() {
+        const tbody = document.getElementById("ordersTableBody");
+        const filtered = ordersFilter === "all" 
+          ? orders 
+          : orders.filter(o => o.status === ordersFilter);
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7">
+                <div class="empty-state">
+                  <p>No hay pedidos con este filtro</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(order => {
+          const statusLabels = {
+            pending: "Pendiente",
+            production: "Produccion",
+            ready: "Listo",
+            shipped: "Despachado",
+            delivered: "Entregado"
+          };
+
+          return `
+            <tr>
+              <td><span class="order-id">#${order.id}</span></td>
+              <td>${order.client}</td>
+              <td>
+                <div class="order-products">
+                  ${order.products.map(p => `<img class="order-product-thumb" src="${p.image}" alt="${p.name}" />`).join("")}
+                </div>
+              </td>
+              <td><span class="order-total">$${order.total.toLocaleString("es-AR")}</span></td>
+              <td>
+                <span class="order-status ${order.status}">
+                  <span class="status-dot"></span>
+                  ${statusLabels[order.status]}
+                </span>
+              </td>
+              <td><span class="order-date">${order.date}</span></td>
+              <td>
+                <div class="order-actions">
+                  <button onclick="viewOrder('${order.id}')">Ver</button>
+                  <button onclick="editOrderStatus('${order.id}')">Estado</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function filterOrders(status) {
+        ordersFilter = status;
+        document.querySelectorAll("#view-orders .filter-btn").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+        renderOrders();
+      }
+
+      function viewOrder(id) {
+        const order = orders.find(o => o.id === id);
+        if (order) {
+          alert(`Pedido #${order.id}\nCliente: ${order.client}\nTotal: $${order.total.toLocaleString("es-AR")}\nEstado: ${order.status}`);
+        }
+      }
+
+      function editOrderStatus(id) {
+        const order = orders.find(o => o.id === id);
+        if (order) {
+          const statuses = ["pending", "production", "ready", "shipped", "delivered"];
+          const currentIndex = statuses.indexOf(order.status);
+          const nextStatus = statuses[(currentIndex + 1) % statuses.length];
+          order.status = nextStatus;
+          renderOrders();
+        }
+      }
+
+      function openOrderModal() {
+        alert("Crear nuevo pedido - funcionalidad en desarrollo");
+      }
+
       // Initialize
       renderProducts();
+      renderOrders();
     </script>
   </body>
 </html>
