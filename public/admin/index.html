@@ -757,10 +757,6 @@
           display: none;
         }
 
-        .mobile-header {
-          display: flex;
-        }
-
         .menu-toggle {
           display: flex;
           align-items: center;
@@ -1379,8 +1375,8 @@
         </a>
 
         <nav class="menu" aria-label="Navegacion del panel">
-          <button type="button" onclick="showView('dashboard')">Dashboard</button>
           <button type="button" class="active" onclick="showView('dashboard')">Dashboard</button>
+          <button type="button" onclick="showView('products')">Productos</button>
           <button type="button" onclick="showView('orders')">Pedidos</button>
           <button type="button" onclick="showView('wholesale')">Mayoristas</button>
           <button type="button" onclick="showView('workshops')">Talleres</button>
