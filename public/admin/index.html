@@ -1947,11 +1947,24 @@
       function showView(viewName) {
         document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
         document.getElementById(`view-${viewName}`).classList.add("active");
-        document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
-        if (event && event.target) {
-          event.target.classList.add("active");
-        }
-        // Close mobile menu when selecting a view
+        
+        // Update menu buttons
+        const menuButtons = document.querySelectorAll(".sidebar .menu button");
+        menuButtons.forEach(btn => {
+          if (btn.textContent.toLowerCase().includes(viewName) || 
+              (viewName === 'dashboard' && btn.textContent.includes('Dashboard')) ||
+              (viewName === 'products' && btn.textContent.includes('Productos')) ||
+              (viewName === 'orders' && btn.textContent.includes('Pedidos')) ||
+              (viewName === 'wholesale' && btn.textContent.includes('Mayoristas')) ||
+              (viewName === 'workshops' && btn.textContent.includes('Talleres')) ||
+              (viewName === 'settings' && btn.textContent.includes('Ajustes'))) {
+            btn.classList.add("active");
+          } else {
+            btn.classList.remove("active");
+          }
+        });
+        
+        // Close mobile menu
         const sidebar = document.querySelector(".sidebar");
         sidebar.classList.remove("mobile-open");
         sidebar.style.display = "";
