@@ -810,6 +810,120 @@
         background: var(--surface-low);
       }
 
+      .workshop-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .workshop-stats .stat-card {
+        background: #fff;
+        border-radius: 0.8rem;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(138, 59, 45, 0.04);
+      }
+
+      .workshop-stats .stat-card small {
+        display: block;
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.3rem;
+      }
+
+      .workshop-stats .stat-card .value {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .students-table-wrapper {
+        background: #fff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+      }
+
+      .students-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .students-table th {
+        text-align: left;
+        padding: 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        background: var(--surface-low);
+        border-bottom: 1px solid var(--surface-high);
+      }
+
+      .students-table td {
+        padding: 1rem;
+        font-size: 0.85rem;
+        border-bottom: 1px solid var(--surface-low);
+      }
+
+      .students-table tr:hover {
+        background: var(--surface-low);
+      }
+
+      .payment-status {
+        display: inline-flex;
+        padding: 0.35rem 0.65rem;
+        border-radius: 999px;
+        font-size: 0.72rem;
+        font-weight: 600;
+      }
+
+      .payment-status.paid {
+        background: #e6f4ea;
+        color: #1e7e34;
+      }
+
+      .payment-status.pending {
+        background: #fef7e0;
+        color: #b08800;
+      }
+
+      .payment-status.overdue {
+        background: #fce8e6;
+        color: #c5221f;
+      }
+
+      .classes-progress {
+        display: flex;
+        gap: 0.3rem;
+      }
+
+      .class-dot {
+        width: 24px;
+        height: 24px;
+        border-radius: 50%;
+        background: var(--surface-container);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 0.7rem;
+        font-weight: 700;
+      }
+
+      .class-dot.done {
+        background: #e6f4ea;
+        color: #1e7e34;
+      }
+
+      .class-dot.current {
+        background: #e8f0fe;
+        color: #1967d2;
+        border: 2px solid #1967d2;
+      }
+
       .empty-state {
         text-align: center;
         padding: 3rem;
@@ -990,10 +1104,49 @@
           <section class="section-header">
             <div>
               <h1>Talleres</h1>
-              <p class="subtitle">Gestion de experiencias</p>
+              <p class="subtitle">Gestion de alumnos y pagos</p>
             </div>
+            <button class="btn btn-primary" onclick="openWorkshopModal()">+ Agregar alumno</button>
           </section>
-          <p style="color: var(--muted)">Vista de talleres en desarrollo...</p>
+
+          <div class="workshop-stats">
+            <div class="stat-card">
+              <small>Alumnos activos</small>
+              <p class="value" id="activeStudentsCount">0</p>
+            </div>
+            <div class="stat-card">
+              <small>Pagos pendientes</small>
+              <p class="value" id="pendingPaymentsCount">0</p>
+            </div>
+            <div class="stat-card">
+              <small>Este mes</small>
+              <p class="value" id="thisMonthRevenue">$0</p>
+            </div>
+          </div>
+
+          <div class="filters">
+            <button class="filter-btn active" onclick="filterWorkshop('all')">Todos</button>
+            <button class="filter-btn" onclick="filterWorkshop('active')">Activos</button>
+            <button class="filter-btn" onclick="filterWorkshop('pending')">Pago pendiente</button>
+            <button class="filter-btn" onclick="filterWorkshop('completed')">Completado</button>
+          </div>
+
+          <div class="students-table-wrapper">
+            <table class="students-table">
+              <thead>
+                <tr>
+                  <th>Alumno</th>
+                  <th>Telefono</th>
+                  <th>Mes actual</th>
+                  <th>Clases (4)</th>
+                  <th>Estado pago</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody id="studentsTableBody">
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div id="view-settings" class="view">
@@ -1451,10 +1604,142 @@
         }
       }
 
+      // WORKSHOP / STUDENTS
+      const months = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+      const currentMonth = months[new Date().getMonth()];
+
+      const students = [
+        { id: 1, name: "Laura Fernandez", phone: "+54 11 2345-6789", month: currentMonth, classes: [true, true, false, false], payment: "pending" },
+        { id: 2, name: "Miguel Torres", phone: "+54 11 8765-4321", month: currentMonth, classes: [true, true, true, false], payment: "paid" },
+        { id: 3, name: "Sofia Gomez", phone: "+54 221 345-6789", month: "Marzo", classes: [true, true, true, true], payment: "paid" },
+        { id: 4, name: "Diego Ramirez", phone: "+54 351 456-7890", month: currentMonth, classes: [true, false, false, false], payment: "overdue" },
+        { id: 5, name: "Valentina Lopez", phone: "+54 11 5678-1234", month: currentMonth, classes: [true, true, true, true], payment: "paid" },
+        { id: 6, name: "Santiago Martinez", phone: "+54 11 9876-5432", month: currentMonth, classes: [true, false, false, false], payment: "pending" },
+      ];
+
+      let workshopFilter = "all";
+
+      function renderStudents() {
+        const tbody = document.getElementById("studentsTableBody");
+        
+        // Update stats
+        const activeCount = students.filter(s => s.month === currentMonth && s.payment !== "completed").length;
+        const pendingCount = students.filter(s => s.payment === "pending" || s.payment === "overdue").length;
+        const revenue = students.filter(s => s.payment === "paid" && s.month === currentMonth).length * 25000;
+        
+        document.getElementById("activeStudentsCount").textContent = activeCount;
+        document.getElementById("pendingPaymentsCount").textContent = pendingCount;
+        document.getElementById("thisMonthRevenue").textContent = "$" + revenue.toLocaleString("es-AR");
+
+        const filtered = workshopFilter === "all" 
+          ? students 
+          : workshopFilter === "active"
+          ? students.filter(s => s.month === currentMonth && s.payment !== "completed")
+          : workshopFilter === "pending"
+          ? students.filter(s => s.payment === "pending" || s.payment === "overdue")
+          : students.filter(s => s.classes.every(c => c));
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="6">
+                <div class="empty-state">
+                  <p>No hay alumnos con este filtro</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(student => {
+          const paymentLabels = {
+            paid: "Pagado",
+            pending: "Pendiente",
+            overdue: "Vencido",
+            completed: "Completado"
+          };
+
+          return `
+            <tr>
+              <td><strong>${student.name}</strong></td>
+              <td>${student.phone}</td>
+              <td>${student.month}</td>
+              <td>
+                <div class="classes-progress">
+                  ${student.classes.map((done, i) => `
+                    <span class="class-dot ${done ? 'done' : ''} ${i === student.classes.filter(Boolean).length && !done ? 'current' : ''}">${i + 1}</span>
+                  `).join("")}
+                </div>
+              </td>
+              <td>
+                <span class="payment-status ${student.payment}">${paymentLabels[student.payment]}</span>
+              </td>
+              <td>
+                <div class="order-actions">
+                  <button onclick="toggleClass(${student.id})">Clase</button>
+                  <button onclick="togglePayment(${student.id})">Pago</button>
+                </div>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function filterWorkshop(status) {
+        workshopFilter = status;
+        document.querySelectorAll("#view-workshops .filter-btn").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+        renderStudents();
+      }
+
+      function toggleClass(id) {
+        const student = students.find(s => s.id === id);
+        if (student) {
+          const nextClass = student.classes.findIndex(c => !c);
+          if (nextClass !== -1) {
+            student.classes[nextClass] = true;
+          }
+          if (student.classes.every(c => c)) {
+            student.payment = "completed";
+          }
+          renderStudents();
+        }
+      }
+
+      function togglePayment(id) {
+        const student = students.find(s => s.id === id);
+        if (student) {
+          const statuses = ["pending", "paid", "overdue"];
+          const currentIndex = statuses.indexOf(student.payment);
+          student.payment = statuses[(currentIndex + 1) % statuses.length];
+          renderStudents();
+        }
+      }
+
+      function openWorkshopModal() {
+        const name = prompt("Nombre del aluno:");
+        if (!name) return;
+        const phone = prompt("Telefono:");
+        
+        const newStudent = {
+          id: Math.max(...students.map(s => s.id), 0) + 1,
+          name: name,
+          phone: phone || "",
+          month: currentMonth,
+          classes: [false, false, false, false],
+          payment: "pending"
+        };
+        
+        students.push(newStudent);
+        renderStudents();
+      }
+
       // Initialize
       renderProducts();
       renderOrders();
       renderWholesale();
+      renderStudents();
     </script>
   </body>
 </html>
