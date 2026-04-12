@@ -1937,10 +1937,12 @@
         }).join("");
       }
 
-      function filterProducts(category) {
+      function filterProducts(category, evt) {
         currentFilter = category;
         document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
-        event.target.classList.add("active");
+        if (evt && evt.target) {
+          evt.target.classList.add("active");
+        }
         renderProducts();
       }
 
@@ -2113,10 +2115,12 @@
         }).join("");
       }
 
-      function filterOrders(status) {
+      function filterOrders(status, evt) {
         ordersFilter = status;
         document.querySelectorAll("#view-orders .filter-btn").forEach(btn => btn.classList.remove("active"));
-        event.target.classList.add("active");
+        if (evt && evt.target) {
+          evt.target.classList.add("active");
+        }
         renderOrders();
       }
 
@@ -2270,10 +2274,12 @@
         }).join("");
       }
 
-      function filterWholesale(status) {
+      function filterWholesale(status, evt) {
         wholesaleFilter = status;
         document.querySelectorAll("#view-wholesale .filter-btn").forEach(btn => btn.classList.remove("active"));
-        event.target.classList.add("active");
+        if (evt && evt.target) {
+          evt.target.classList.add("active");
+        }
         renderWholesale();
       }
 
@@ -2348,10 +2354,12 @@
         }).join("");
       }
 
-      function filterWorkshop(status) {
+      function filterWorkshop(status, evt) {
         workshopFilter = status;
         document.querySelectorAll("#view-workshops .filter-btn").forEach(btn => btn.classList.remove("active"));
-        event.target.classList.add("active");
+        if (evt && evt.target) {
+          evt.target.classList.add("active");
+        }
         renderStudents();
       }
 
