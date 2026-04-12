@@ -901,27 +901,81 @@
         gap: 0.3rem;
       }
 
-      .class-dot {
-        width: 24px;
-        height: 24px;
-        border-radius: 50%;
-        background: var(--surface-container);
+      .settings-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+      }
+
+      .settings-section {
+        background: #fff;
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+      }
+
+      .settings-section h3 {
+        margin: 0 0 1rem;
+        font-size: 1rem;
+        font-family: "Noto Serif", serif;
+        color: var(--text);
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid var(--surface-low);
+      }
+
+      .settings-form {
+        display: grid;
+        gap: 0.85rem;
+      }
+
+      .settings-form .form-group {
+        display: grid;
+        gap: 0.3rem;
+      }
+
+      .settings-form label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      .settings-form input,
+      .settings-form select,
+      .settings-form textarea {
+        padding: 0.6rem 0.8rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 0.5rem;
+        font-family: inherit;
+        font-size: 0.85rem;
+      }
+
+      .settings-form input:focus,
+      .settings-form select:focus,
+      .settings-form textarea:focus {
+        outline: none;
+        border-color: var(--primary);
+      }
+
+      .toggle {
         display: flex;
         align-items: center;
-        justify-content: center;
-        font-size: 0.7rem;
-        font-weight: 700;
+        gap: 0.5rem;
+        cursor: pointer;
       }
 
-      .class-dot.done {
-        background: #e6f4ea;
-        color: #1e7e34;
+      .toggle input {
+        width: 18px;
+        height: 18px;
       }
 
-      .class-dot.current {
-        background: #e8f0fe;
-        color: #1967d2;
-        border: 2px solid #1967d2;
+      .toggle span {
+        font-size: 0.85rem;
+        color: var(--text);
+        text-transform: none;
+        font-weight: 400;
+        letter-spacing: normal;
       }
 
       .empty-state {
@@ -1157,10 +1211,93 @@
           <section class="section-header">
             <div>
               <h1>Ajustes</h1>
-              <p class="subtitle">Configuracion del panel</p>
+              <p class="subtitle">Configuracion general del negocio</p>
             </div>
           </section>
-          <p style="color: var(--muted)">Vista de ajustes en desarrollo...</p>
+
+          <div class="settings-grid">
+            <div class="settings-section">
+              <h3>Datos de contacto</h3>
+              <div class="settings-form">
+                <div class="form-group">
+                  <label>Email</label>
+                  <input type="email" value="hola@magmaceramica.com" />
+                </div>
+                <div class="form-group">
+                  <label>Telefono</label>
+                  <input type="tel" value="+54 9 11 2345-6789" />
+                </div>
+                <div class="form-group">
+                  <label>Direccion</label>
+                  <input type="text" value="Palermo, Buenos Aires" />
+                </div>
+                <div class="form-group">
+                  <label>Instagram</label>
+                  <input type="text" value="@magmaceramica" />
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <h3>Configuracion de tienda</h3>
+              <div class="settings-form">
+                <div class="form-group">
+                  <label>Moneda</label>
+                  <select>
+                    <option selected>Peso Argentino (ARS)</option>
+                    <option>Dolar (USD)</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label>Envio gratis desde ($)</label>
+                  <input type="number" value="60000" />
+                </div>
+                <div class="form-group">
+                  <label>IVA incluido</label>
+                  <label class="toggle">
+                    <input type="checkbox" checked />
+                    <span>Precios con IVA</span>
+                  </label>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <h3>Politicas</h3>
+              <div class="settings-form">
+                <div class="form-group">
+                  <label>Tiempo de produccion (dias)</label>
+                  <input type="number" value="7" />
+                </div>
+                <div class="form-group">
+                  <label>Politica de cambios</label>
+                  <textarea rows="2">No se aceptan cambios ni devoluciones una vez entrega el producto.</textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="settings-section">
+              <h3>Notificaciones</h3>
+              <div class="settings-form">
+                <label class="toggle">
+                  <input type="checkbox" checked />
+                  <span>Nuevos pedidos</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" checked />
+                  <span>Solicitudes mayoristas</span>
+                </label>
+                <label class="toggle">
+                  <input type="checkbox" />
+                  <span>Alertas de stock bajo</span>
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem;">
+            <button class="btn btn-primary">Guardar cambios</button>
+          </div>
         </div>
       </main>
     </div>
