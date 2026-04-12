@@ -1,4 +1,4 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="es">
   <head>
     <meta charset="UTF-8" />
@@ -28,390 +28,533 @@
         box-sizing: border-box;
       }
 
-      :focus-visible {
-        outline: 2px solid rgba(138, 59, 45, 0.45);
-        outline-offset: 2px;
-      }
-
       body {
         margin: 0;
         font-family: "Manrope", sans-serif;
         color: var(--text);
-        background:
-          radial-gradient(circle at 8% 12%, rgba(168, 82, 67, 0.12), transparent 40%),
-          radial-gradient(circle at 88% 18%, rgba(138, 59, 45, 0.08), transparent 30%),
-          var(--surface);
+        background: var(--surface);
       }
 
       .layout {
-        min-height: 100dvh;
         display: grid;
-        grid-template-columns: 272px 1fr;
+        grid-template-columns: 240px 1fr;
+        min-height: 100vh;
       }
 
       .sidebar {
-        position: sticky;
-        top: 0;
-        height: 100dvh;
-        padding: 1.4rem 1.05rem;
-        background: rgba(252, 249, 244, 0.86);
-        backdrop-filter: blur(8px);
-        border-right: 1px solid rgba(138, 59, 45, 0.09);
+        background: var(--surface-low);
+        padding: 1.2rem 1rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1.8rem;
+        border-right: 1px solid var(--surface-high);
       }
 
       .brand {
         display: flex;
         align-items: center;
-        gap: 0.6rem;
+        gap: 0.65rem;
         text-decoration: none;
-        margin-bottom: 1.3rem;
+        color: var(--text);
       }
 
       .brand img {
-        width: 40px;
-        height: 40px;
-        object-fit: contain;
+        width: 38px;
+        height: 38px;
+        border-radius: 0.6rem;
+        object-fit: cover;
+      }
+
+      .brand div {
+        display: flex;
+        flex-direction: column;
       }
 
       .brand strong {
         font-family: "Noto Serif", serif;
-        color: var(--primary);
-        font-size: 1.05rem;
-        letter-spacing: 0.05em;
+        font-size: 1.1rem;
+        font-weight: 600;
       }
 
       .brand span {
-        display: block;
         font-size: 0.66rem;
+        color: var(--muted);
         text-transform: uppercase;
-        letter-spacing: 0.16em;
-        color: var(--secondary);
+        letter-spacing: 0.1em;
       }
 
       .menu {
         display: grid;
-        gap: 0.35rem;
+        gap: 0.25rem;
       }
 
       .menu button {
         border: 0;
         background: transparent;
-        color: #4d4038;
         text-align: left;
-        padding: 0.7rem 0.8rem;
-        border-radius: 0.75rem;
-        font-weight: 600;
+        padding: 0.65rem 0.8rem;
+        border-radius: 0.6rem;
+        font-family: inherit;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--muted);
         cursor: pointer;
+        transition: background 160ms, color 160ms;
       }
 
-      .menu button.active,
       .menu button:hover {
         background: var(--surface-container);
-        color: var(--primary);
+        color: var(--text);
+      }
+
+      .menu button.active {
+        background: var(--primary);
+        color: #fff;
       }
 
       .sidebar-footer {
-        position: absolute;
-        left: 1.05rem;
-        right: 1.05rem;
-        bottom: 1.2rem;
+        margin-top: auto;
+        padding-top: 1rem;
+        border-top: 1px solid var(--surface-high);
       }
 
       .sidebar-footer a {
-        display: block;
-        text-align: center;
+        font-size: 0.78rem;
+        color: var(--secondary);
         text-decoration: none;
-        background: linear-gradient(108deg, var(--primary), var(--primary-2));
-        color: #fff;
-        padding: 0.8rem 0.9rem;
-        border-radius: 0.75rem;
-        font-size: 0.72rem;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        font-weight: 700;
+      }
+
+      .sidebar-footer a:hover {
+        color: var(--primary);
       }
 
       .main {
-        padding: 1.2rem 1.2rem 2rem;
+        padding: 1.2rem 1.8rem;
       }
 
       .topbar {
-        position: sticky;
-        top: 0.7rem;
-        z-index: 25;
-        background: rgba(252, 249, 244, 0.84);
-        backdrop-filter: blur(10px);
-        border: 1px solid rgba(138, 59, 45, 0.1);
-        border-radius: 0.9rem;
-        padding: 0.6rem;
         display: flex;
-        gap: 0.7rem;
-        align-items: center;
         justify-content: space-between;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
       }
 
       .search {
-        width: min(420px, 100%);
-        border: 0;
-        background: var(--surface-container);
-        border-radius: 0.65rem;
-        padding: 0.68rem 0.78rem;
+        flex: 1;
+        max-width: 420px;
+        padding: 0.65rem 1rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 0.7rem;
+        font-family: inherit;
+        font-size: 0.85rem;
+        background: #fff;
+      }
+
+      .search:focus {
+        outline: none;
+        border-color: var(--primary);
       }
 
       .top-actions {
         display: flex;
-        gap: 0.45rem;
+        gap: 0.4rem;
       }
 
       .top-actions button {
+        width: 36px;
+        height: 36px;
         border: 0;
-        width: 34px;
-        height: 34px;
         border-radius: 999px;
         background: var(--surface-container);
-        color: var(--primary);
+        color: var(--secondary);
+        font-size: 0.85rem;
+        font-weight: 600;
         cursor: pointer;
       }
 
-      .header {
-        margin: 1.35rem 0;
+      .top-actions button:hover {
+        background: var(--surface-high);
       }
 
-      .eyebrow {
-        font-size: 0.66rem;
-        text-transform: uppercase;
-        letter-spacing: 0.28em;
-        color: var(--primary);
-        font-weight: 700;
+      .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.4rem;
       }
 
-      .header h1 {
-        margin: 0.5rem 0 0;
-        font-family: "Noto Serif", serif;
-        font-size: clamp(2rem, 4.2vw, 3.3rem);
-        line-height: 1.05;
-      }
-
-      .kpis {
-        display: grid;
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-        gap: 0.85rem;
-      }
-
-      .card {
-        background: var(--surface-low);
-        border-radius: 1rem;
-        padding: 1rem;
-        box-shadow: 0 12px 22px rgba(138, 59, 45, 0.08);
-      }
-
-      .card small {
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: #6a5d54;
-        font-size: 0.64rem;
-        font-weight: 700;
-      }
-
-      .kpi-value {
-        margin: 0.5rem 0 0;
-        font-family: "Noto Serif", serif;
-        font-size: 1.7rem;
-      }
-
-      .kpi-note {
-        margin: 0.3rem 0 0;
-        color: #6a5d54;
-        font-size: 0.78rem;
-      }
-
-      .grid {
-        margin-top: 0.95rem;
-        display: grid;
-        grid-template-columns: 1.55fr 1fr;
-        gap: 0.85rem;
-      }
-
-      .panel {
-        background: var(--surface-container);
-        border-radius: 1rem;
-        padding: 1rem;
-      }
-
-      .panel h2 {
+      .section-header h1 {
         margin: 0;
         font-family: "Noto Serif", serif;
-        font-size: 1.3rem;
+        font-size: 1.8rem;
       }
 
-      .panel p {
-        margin: 0.35rem 0 0;
+      .section-header .subtitle {
         color: var(--muted);
-        font-size: 0.88rem;
+        font-size: 0.9rem;
+        margin-top: 0.25rem;
       }
 
-      .bars {
-        margin-top: 0.9rem;
-        min-height: 220px;
-        display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        align-items: end;
-        gap: 0.6rem;
-      }
-
-      .bar {
-        border-radius: 0.5rem 0.5rem 0 0;
-        background: linear-gradient(180deg, var(--primary-2), var(--primary));
-        opacity: 0.88;
-      }
-
-      .bar:nth-child(1) { height: 34%; }
-      .bar:nth-child(2) { height: 47%; }
-      .bar:nth-child(3) { height: 43%; }
-      .bar:nth-child(4) { height: 63%; }
-      .bar:nth-child(5) { height: 74%; }
-      .bar:nth-child(6) { height: 66%; }
-
-      .quick-list {
-        margin-top: 0.75rem;
-        display: grid;
-        gap: 0.55rem;
-      }
-
-      .quick-item {
-        display: grid;
-        grid-template-columns: 58px 1fr auto;
-        gap: 0.6rem;
+      .btn {
+        display: inline-flex;
         align-items: center;
-        background: rgba(252, 249, 244, 0.74);
-        border-radius: 0.8rem;
-        padding: 0.4rem;
+        gap: 0.4rem;
+        padding: 0.6rem 1rem;
+        border: 0;
+        border-radius: 0.65rem;
+        font-family: inherit;
+        font-size: 0.8rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: transform 160ms, box-shadow 160ms;
       }
 
-      .quick-item img {
-        width: 58px;
-        height: 58px;
-        border-radius: 0.58rem;
+      .btn:hover {
+        transform: translateY(-1px);
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+
+      .btn-secondary {
+        background: var(--surface-container);
+        color: var(--text);
+      }
+
+      .btn-ghost {
+        background: transparent;
+        color: var(--secondary);
+      }
+
+      .filters {
+        display: flex;
+        gap: 0.5rem;
+        margin-bottom: 1.2rem;
+        flex-wrap: wrap;
+      }
+
+      .filter-btn {
+        padding: 0.45rem 0.85rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 999px;
+        background: #fff;
+        font-family: inherit;
+        font-size: 0.75rem;
+        color: var(--muted);
+        cursor: pointer;
+        transition: border-color 160ms, background 160ms;
+      }
+
+      .filter-btn:hover {
+        border-color: var(--primary);
+      }
+
+      .filter-btn.active {
+        background: var(--primary);
+        color: #fff;
+        border-color: var(--primary);
+      }
+
+      .products-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 1.2rem;
+      }
+
+      .product-card {
+        background: #fff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+        transition: transform 220ms, box-shadow 220ms;
+      }
+
+      .product-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(138, 59, 45, 0.1);
+      }
+
+      .product-image {
+        aspect-ratio: 4/3;
+        background: var(--surface-container);
+        overflow: hidden;
+      }
+
+      .product-image img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
       }
 
-      .quick-item h4 {
+      .product-info {
+        padding: 1rem;
+      }
+
+      .product-info h3 {
         margin: 0;
+        font-size: 1rem;
+        font-family: "Noto Serif", serif;
+      }
+
+      .product-meta {
+        color: var(--muted);
+        font-size: 0.8rem;
+        margin-top: 0.2rem;
+      }
+
+      .product-price {
+        font-weight: 700;
+        color: var(--primary);
+        font-size: 1.1rem;
+        margin-top: 0.5rem;
+      }
+
+      .product-stock {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 0.8rem;
+        padding-top: 0.8rem;
+        border-top: 1px solid var(--surface-low);
+      }
+
+      .stock-badge {
+        font-size: 0.7rem;
+        padding: 0.25rem 0.5rem;
+        border-radius: 999px;
+        font-weight: 600;
+      }
+
+      .stock-badge.in {
+        background: #e6f4ea;
+        color: #1e7e34;
+      }
+
+      .stock-badge.low {
+        background: #fef7e0;
+        color: #b08800;
+      }
+
+      .stock-badge.out {
+        background: #fce8e6;
+        color: #c5221f;
+      }
+
+      .product-actions {
+        display: flex;
+        gap: 0.4rem;
+        margin-top: 0.6rem;
+      }
+
+      .product-actions button {
+        flex: 1;
+        padding: 0.45rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 0.5rem;
+        background: #fff;
+        font-family: inherit;
+        font-size: 0.72rem;
+        color: var(--muted);
+        cursor: pointer;
+        transition: border-color 160ms, color 160ms;
+      }
+
+      .product-actions button:hover {
+        border-color: var(--primary);
+        color: var(--primary);
+      }
+
+      .product-actions button.danger:hover {
+        border-color: #c5221f;
+        color: #c5221f;
+      }
+
+      .stats-row {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .stat-card {
+        background: #fff;
+        border-radius: 0.8rem;
+        padding: 1rem;
+        box-shadow: 0 2px 8px rgba(138, 59, 45, 0.04);
+      }
+
+      .stat-card small {
+        display: block;
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        margin-bottom: 0.3rem;
+      }
+
+      .stat-card .value {
+        font-size: 1.6rem;
+        font-weight: 800;
+        color: var(--text);
+      }
+
+      .stat-card .note {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(28, 28, 25, 0.4);
+        z-index: 100;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .modal.open {
+        display: flex;
+      }
+
+      .modal-content {
+        background: #fff;
+        border-radius: 1.2rem;
+        width: 90%;
+        max-width: 600px;
+        max-height: 90vh;
+        overflow: auto;
+        padding: 1.5rem;
+      }
+
+      .modal-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1rem;
+        border-bottom: 1px solid var(--surface-high);
+      }
+
+      .modal-header h2 {
+        margin: 0;
+        font-family: "Noto Serif", serif;
+      }
+
+      .modal-close {
+        width: 32px;
+        height: 32px;
+        border: 0;
+        border-radius: 999px;
+        background: var(--surface-low);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .form-grid {
+        display: grid;
+        gap: 1rem;
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+      }
+
+      .form-group {
+        display: grid;
+        gap: 0.4rem;
+      }
+
+      .form-group label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--secondary);
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        padding: 0.65rem 0.8rem;
+        border: 1px solid var(--surface-high);
+        border-radius: 0.6rem;
+        font-family: inherit;
         font-size: 0.9rem;
       }
 
-      .quick-item span {
-        color: #6a5d54;
-        font-size: 0.75rem;
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
       }
 
-      .pill {
-        font-size: 0.64rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-weight: 700;
-        padding: 0.3rem 0.45rem;
-        border-radius: 999px;
-        background: #ead9cf;
-        color: #6b3f35;
+      .form-group input:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        outline: none;
+        border-color: var(--primary);
       }
 
-      .tables {
-        margin-top: 0.95rem;
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 0.85rem;
+      .modal-footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid var(--surface-high);
       }
 
-      table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-
-      th,
-      td {
-        text-align: left;
-        padding: 0.6rem 0.2rem;
-      }
-
-      th {
-        font-size: 0.64rem;
-        text-transform: uppercase;
-        letter-spacing: 0.1em;
-        color: #6a5d54;
-      }
-
-      td {
-        font-size: 0.86rem;
-        border-top: 1px solid rgba(138, 59, 45, 0.08);
-      }
-
-      .status {
-        display: inline-block;
-        border-radius: 999px;
-        padding: 0.24rem 0.5rem;
-        font-size: 0.64rem;
-        text-transform: uppercase;
-        letter-spacing: 0.08em;
-        font-weight: 700;
-      }
-
-      .ok { background: #dfebd9; color: #2d5938; }
-      .work { background: #f6e3d5; color: #7b4c31; }
-      .wait { background: #f4dede; color: #8a3b2d; }
-
-      @media (max-width: 1140px) {
-        .kpis {
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-        }
-
-        .grid,
-        .tables {
-          grid-template-columns: 1fr;
-        }
-      }
-
-      @media (max-width: 840px) {
+      @media (max-width: 900px) {
         .layout {
           grid-template-columns: 1fr;
         }
 
         .sidebar {
-          position: static;
-          height: auto;
-          border-right: 0;
-          border-bottom: 1px solid rgba(138, 59, 45, 0.1);
+          display: none;
         }
 
-        .sidebar-footer {
-          position: static;
-          margin-top: 0.9rem;
+        .stats-row {
+          grid-template-columns: 1fr 1fr;
         }
 
-        .topbar {
-          top: 0.4rem;
-          flex-direction: column;
-          align-items: stretch;
+        .products-grid {
+          grid-template-columns: 1fr 1fr;
         }
+      }
 
-        .search {
-          width: 100%;
-        }
-
-        .main {
-          padding: 0.9rem;
-        }
-
-        .kpis {
+      @media (max-width: 600px) {
+        .stats-row {
           grid-template-columns: 1fr;
         }
+
+        .products-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+
+      .view {
+        display: none;
+      }
+
+      .view.active {
+        display: block;
       }
     </style>
   </head>
   <body>
     <div class="layout">
       <aside class="sidebar">
-<a class="brand" href="../../index.html" aria-label="Volver al sitio">
+        <a class="brand" href="../../index.html" aria-label="Volver al sitio">
           <img src="../../logo.png" alt="Logo Magma" />
           <div>
             <strong>Magma</strong>
@@ -420,12 +563,12 @@
         </a>
 
         <nav class="menu" aria-label="Navegacion del panel">
-          <button class="active" type="button">Dashboard</button>
-          <button type="button">Productos</button>
-          <button type="button">Pedidos</button>
-          <button type="button">Mayoristas</button>
-          <button type="button">Talleres</button>
-          <button type="button">Ajustes</button>
+          <button type="button" onclick="showView('dashboard')">Dashboard</button>
+          <button type="button" class="active" onclick="showView('products')">Productos</button>
+          <button type="button" onclick="showView('orders')">Pedidos</button>
+          <button type="button" onclick="showView('wholesale')">Mayoristas</button>
+          <button type="button" onclick="showView('workshops')">Talleres</button>
+          <button type="button" onclick="showView('settings')">Ajustes</button>
         </nav>
 
         <div class="sidebar-footer">
@@ -435,7 +578,7 @@
 
       <main class="main">
         <header class="topbar">
-          <input class="search" type="search" placeholder="Buscar orden, cliente o producto..." />
+          <input class="search" type="search" placeholder="Buscar producto, orden o cliente..." />
           <div class="top-actions">
             <button type="button" aria-label="Notificaciones">N</button>
             <button type="button" aria-label="Mensajes">M</button>
@@ -443,152 +586,299 @@
           </div>
         </header>
 
-        <section class="header">
-          <span class="eyebrow">Panel interno</span>
-          <h1>Curaduria diaria del atelier Magma</h1>
-        </section>
-
-        <section class="kpis">
-          <article class="card">
-            <small>Ventas del mes</small>
-            <p class="kpi-value">$2.480.300</p>
-            <p class="kpi-note">+12% vs mes anterior</p>
-          </article>
-          <article class="card">
-            <small>Pedidos activos</small>
-            <p class="kpi-value">36</p>
-            <p class="kpi-note">9 listos para despacho</p>
-          </article>
-          <article class="card">
-            <small>Formularios mayoristas</small>
-            <p class="kpi-value">14</p>
-            <p class="kpi-note">5 nuevos esta semana</p>
-          </article>
-          <article class="card">
-            <small>Cupos talleres</small>
-            <p class="kpi-value">7</p>
-            <p class="kpi-note">Ultimos lugares de abril</p>
-          </article>
-        </section>
-
-        <section class="grid">
-          <article class="panel">
-            <h2>Ritmo de ventas</h2>
-            <p>Seguimiento de conversion semanal por canal online.</p>
-            <div class="bars" aria-hidden="true">
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
-              <div class="bar"></div>
+        <!-- DASHBOARD VIEW -->
+        <div id="view-dashboard" class="view">
+          <section class="section-header">
+            <div>
+              <h1>Dashboard</h1>
+              <p class="subtitle">Resumen de tu negocio</p>
             </div>
-          </article>
+          </section>
 
-          <article class="panel">
-            <h2>Piezas destacadas</h2>
-            <p>Productos con mayor traccion en los ultimos 7 dias.</p>
-            <div class="quick-list">
-              <div class="quick-item">
-                <img src="../../625262061_18034343237765495_6938131803006591943_n.jpeg" alt="Bowl Orbit" />
-                <div>
-                  <h4>Bowl Orbit</h4>
-                  <span>32 unidades vendidas</span>
-                </div>
-                <span class="pill">Top</span>
-              </div>
-              <div class="quick-item">
-                <img src="../../SaveClip.App_649699739_17993652941920685_3240829447011146932_n.jpg" alt="Set Tazas Bosco" />
-                <div>
-                  <h4>Set Tazas Bosco</h4>
-                  <span>21 unidades vendidas</span>
-                </div>
-                <span class="pill">Top</span>
-              </div>
-              <div class="quick-item">
-                <img src="../../655439254_18104990270499726_1504171754844047591_n.jpeg" alt="Bowl Laguna" />
-                <div>
-                  <h4>Bowl Laguna</h4>
-                  <span>18 unidades vendidas</span>
-                </div>
-                <span class="pill">Top</span>
-              </div>
+          <section class="stats-row">
+            <article class="stat-card">
+              <small>Ventas del mes</small>
+              <p class="value">$2.480.300</p>
+              <p class="note">+12% vs mes anterior</p>
+            </article>
+            <article class="stat-card">
+              <small>Pedidos activos</small>
+              <p class="value">36</p>
+              <p class="note">9 listos para despacho</p>
+            </article>
+            <article class="stat-card">
+              <small>Productos en stock</small>
+              <p class="value">24</p>
+              <p class="note">3 con stock bajo</p>
+            </article>
+            <article class="stat-card">
+              <small>Cupos talleres</small>
+              <p class="value">7</p>
+              <p class="note">Ultimos lugares de abril</p>
+            </article>
+          </section>
+        </div>
+
+        <!-- PRODUCTS VIEW -->
+        <div id="view-products" class="view active">
+          <section class="section-header">
+            <div>
+              <h1>Productos</h1>
+              <p class="subtitle">Gestiona tu catalogo de piezas</p>
             </div>
-          </article>
-        </section>
+            <button class="btn btn-primary" onclick="openModal()">+ Agregar producto</button>
+          </section>
 
-        <section class="tables">
-          <article class="panel">
-            <h2>Pedidos recientes</h2>
-            <p>Actualizacion en tiempo real desde el storefront.</p>
-            <table aria-label="Pedidos recientes">
-              <thead>
-                <tr>
-                  <th>ID</th>
-                  <th>Cliente</th>
-                  <th>Estado</th>
-                  <th>Total</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#MG-1032</td>
-                  <td>Elena H.</td>
-                  <td><span class="status work">Produccion</span></td>
-                  <td>$124.000</td>
-                </tr>
-                <tr>
-                  <td>#MG-1031</td>
-                  <td>Julian B.</td>
-                  <td><span class="status ok">Despachado</span></td>
-                  <td>$58.000</td>
-                </tr>
-                <tr>
-                  <td>#MG-1030</td>
-                  <td>Sofia C.</td>
-                  <td><span class="status wait">Pago pendiente</span></td>
-                  <td>$39.500</td>
-                </tr>
-              </tbody>
-            </table>
-          </article>
+          <div class="filters">
+            <button class="filter-btn active" onclick="filterProducts('all')">Todos</button>
+            <button class="filter-btn" onclick="filterProducts('bowls')">Bowls</button>
+            <button class="filter-btn" onclick="filterProducts('tazas')">Tazas</button>
+            <button class="filter-btn" onclick="filterProducts('sets')">Sets</button>
+            <button class="filter-btn" onclick="filterProducts('decor')">Decoracion</button>
+          </div>
 
-          <article class="panel">
-            <h2>Inbox mayorista</h2>
-            <p>Solicitudes recibidas desde el formulario de la landing.</p>
-            <table aria-label="Solicitudes mayoristas">
-              <thead>
-                <tr>
-                  <th>Nombre</th>
-                  <th>Contacto</th>
-                  <th>Tipo</th>
-                  <th>Estado</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Hotel Bruma</td>
-                  <td>compras@bruma.ar</td>
-                  <td>Hoteleria</td>
-                  <td><span class="status work">Revisar</span></td>
-                </tr>
-                <tr>
-                  <td>Casa Nativa</td>
-                  <td>+54 9 11 3311 8721</td>
-                  <td>Retail</td>
-                  <td><span class="status ok">Respondido</span></td>
-                </tr>
-                <tr>
-                  <td>Oro Bistró</td>
-                  <td>admin@orobistro.com</td>
-                  <td>Gastronomia</td>
-                  <td><span class="status wait">Nuevo</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </article>
-        </section>
+          <div class="products-grid" id="productsGrid">
+            <!-- Products will be rendered here -->
+          </div>
+        </div>
+
+        <!-- OTHER VIEWS -->
+        <div id="view-orders" class="view">
+          <section class="section-header">
+            <div>
+              <h1>Pedidos</h1>
+              <p class="subtitle">Seguimiento de ordenes</p>
+            </div>
+          </section>
+          <p style="color: var(--muted)">Vista de pedidos en desarrollo...</p>
+        </div>
+
+        <div id="view-wholesale" class="view">
+          <section class="section-header">
+            <div>
+              <h1>Mayoristas</h1>
+              <p class="subtitle">Solicitudes B2B</p>
+            </div>
+          </section>
+          <p style="color: var(--muted)">Vista de mayoristas en desarrollo...</p>
+        </div>
+
+        <div id="view-workshops" class="view">
+          <section class="section-header">
+            <div>
+              <h1>Talleres</h1>
+              <p class="subtitle">Gestion de experiencias</p>
+            </div>
+          </section>
+          <p style="color: var(--muted)">Vista de talleres en desarrollo...</p>
+        </div>
+
+        <div id="view-settings" class="view">
+          <section class="section-header">
+            <div>
+              <h1>Ajustes</h1>
+              <p class="subtitle">Configuracion del panel</p>
+            </div>
+          </section>
+          <p style="color: var(--muted)">Vista de ajustes en desarrollo...</p>
+        </div>
       </main>
     </div>
+
+    <!-- PRODUCT MODAL -->
+    <div class="modal" id="productModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2 id="modalTitle">Agregar producto</h2>
+          <button class="modal-close" onclick="closeModal()">&times;</button>
+        </div>
+        <form id="productForm" onsubmit="saveProduct(event)">
+          <input type="hidden" id="productId" />
+          <div class="form-grid">
+            <div class="form-group">
+              <label for="name">Nombre del producto</label>
+              <input type="text" id="name" required placeholder="ej: Bowl Orbit" />
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="price">Precio (ARS)</label>
+                <input type="number" id="price" required placeholder="39500" />
+              </div>
+              <div class="form-group">
+                <label for="category">Categoria</label>
+                <select id="category" required>
+                  <option value="">Seleccionar...</option>
+                  <option value="bowls">Bowls</option>
+                  <option value="tazas">Tazas</option>
+                  <option value="sets">Sets</option>
+                  <option value="decor">Decoracion</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="stock">Stock</label>
+                <input type="number" id="stock" required placeholder="10" />
+              </div>
+              <div class="form-group">
+                <label for="status">Estado</label>
+                <select id="status" required>
+                  <option value="active">Activo</option>
+                  <option value="draft">Borrador</option>
+                  <option value="archived">Archivado</option>
+                </select>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="description">Descripcion</label>
+              <textarea id="description" placeholder="Caracteristicas del producto..."></textarea>
+            </div>
+            <div class="form-group">
+              <label for="image">URL de imagen</label>
+              <input type="url" id="image" placeholder="https://..." />
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+            <button type="submit" class="btn btn-primary">Guardar producto</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      const products = [
+        { id: 1, name: "Bowl Orbit", price: 39500, category: "bowls", stock: 12, status: "active", image: "../../625262061_18034343237765495_6938131803006591943_n.jpeg", description: "26 cm | Centro de mesa" },
+        { id: 2, name: "Set Tazas Bosco", price: 58000, category: "sets", stock: 8, status: "active", image: "../../SaveClip.App_649699739_17993652941920685_3240829447011146932_n.jpg", description: "Set x6 | Interior esmaltado" },
+        { id: 3, name: "Bowl Laguna", price: 36200, category: "bowls", stock: 15, status: "active", image: "../../655439254_18104990270499726_1504171754844047591_n.jpeg", description: "22 cm | Serie cromatica" },
+        { id: 4, name: "Duo Sierra", price: 44000, category: "sets", stock: 6, status: "active", image: "../../SaveClip.App_655578528_18091219631330045_1019078361804900635_n.jpg", description: "Set x2 | Ideal para servir" },
+        { id: 5, name: "Bowl Solar", price: 41800, category: "bowls", stock: 3, status: "active", image: "../../624599165_18056156174379675_9095367774909437050_n.jpeg", description: "24 cm | Diseno organico" },
+        { id: 6, name: "Set Aurora", price: 52200, category: "sets", stock: 5, status: "active", image: "../../SaveClip.App_655708811_18208866220334211_1687735197626328638_n.jpg", description: "Set x4 | Colores assorted" },
+        { id: 7, name: "Caja Pigmento", price: 61000, category: "decor", stock: 0, status: "active", image: "../../SaveClip.App_656243507_18136116310517299_572441670182864537_n.jpg", description: "Set de muestras | Ceramista" },
+        { id: 8, name: "Fuente Terra", price: 46800, category: "decor", stock: 4, status: "active", image: "../../SaveClip.App_476349540_18031225991545275_206682916948926368_n.jpg", description: "32 cm | Artefacto de autor" },
+      ];
+
+      let currentFilter = "all";
+
+      function renderProducts() {
+        const grid = document.getElementById("productsGrid");
+        const filtered = currentFilter === "all" 
+          ? products 
+          : products.filter(p => p.category === currentFilter);
+
+        grid.innerHTML = filtered.map(product => {
+          const stockClass = product.stock === 0 ? "out" : product.stock < 5 ? "low" : "in";
+          const stockLabel = product.stock === 0 ? "Sin stock" : product.stock < 5 ? `Stock bajo (${product.stock})` : `${product.stock} disponibles`;
+          
+          return `
+            <article class="product-card">
+              <div class="product-image">
+                <img src="${product.image}" alt="${product.name}" />
+              </div>
+              <div class="product-info">
+                <h3>${product.name}</h3>
+                <p class="product-meta">${product.description}</p>
+                <p class="product-price">$${product.price.toLocaleString("es-AR")}</p>
+                <div class="product-stock">
+                  <span class="stock-badge ${stockClass}">${stockLabel}</span>
+                </div>
+                <div class="product-actions">
+                  <button onclick="editProduct(${product.id})">Editar</button>
+                  <button class="danger" onclick="deleteProduct(${product.id})">Eliminar</button>
+                </div>
+              </div>
+            </article>
+          `;
+        }).join("");
+      }
+
+      function filterProducts(category) {
+        currentFilter = category;
+        document.querySelectorAll(".filter-btn").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+        renderProducts();
+      }
+
+      function showView(viewName) {
+        document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
+        document.getElementById(`view-${viewName}`).classList.add("active");
+        document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
+        event.target.classList.add("active");
+      }
+
+      function openModal(product = null) {
+        const modal = document.getElementById("productModal");
+        const title = document.getElementById("modalTitle");
+        const form = document.getElementById("productForm");
+
+        if (product) {
+          title.textContent = "Editar producto";
+          document.getElementById("productId").value = product.id;
+          document.getElementById("name").value = product.name;
+          document.getElementById("price").value = product.price;
+          document.getElementById("category").value = product.category;
+          document.getElementById("stock").value = product.stock;
+          document.getElementById("status").value = product.status;
+          document.getElementById("description").value = product.description || "";
+          document.getElementById("image").value = product.image;
+        } else {
+          title.textContent = "Agregar producto";
+          form.reset();
+          document.getElementById("productId").value = "";
+        }
+
+        modal.classList.add("open");
+      }
+
+      function closeModal() {
+        document.getElementById("productModal").classList.remove("open");
+      }
+
+      function editProduct(id) {
+        const product = products.find(p => p.id === id);
+        if (product) openModal(product);
+      }
+
+      function deleteProduct(id) {
+        if (confirm("Estas seguro de eliminar este producto?")) {
+          const index = products.findIndex(p => p.id === id);
+          if (index > -1) {
+            products.splice(index, 1);
+            renderProducts();
+          }
+        }
+      }
+
+      function saveProduct(event) {
+        event.preventDefault();
+        
+        const id = document.getElementById("productId").value;
+        const productData = {
+          name: document.getElementById("name").value,
+          price: Number(document.getElementById("price").value),
+          category: document.getElementById("category").value,
+          stock: Number(document.getElementById("stock").value),
+          status: document.getElementById("status").value,
+          description: document.getElementById("description").value,
+          image: document.getElementById("image").value || "../../logo.png"
+        };
+
+        if (id) {
+          const index = products.findIndex(p => p.id === Number(id));
+          if (index > -1) {
+            products[index] = { ...products[index], ...productData };
+          }
+        } else {
+          const newId = Math.max(...products.map(p => p.id), 0) + 1;
+          products.push({ id: newId, ...productData });
+        }
+
+        closeModal();
+        renderProducts();
+      }
+
+      // Initialize
+      renderProducts();
+    </script>
   </body>
 </html>
