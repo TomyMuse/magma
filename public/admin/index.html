@@ -776,6 +776,40 @@
         border-top: 1px solid var(--surface-high);
       }
 
+      .wholesale-table-wrapper {
+        background: #fff;
+        border-radius: 1rem;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(138, 59, 45, 0.06);
+      }
+
+      .wholesale-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      .wholesale-table th {
+        text-align: left;
+        padding: 1rem;
+        font-size: 0.7rem;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        background: var(--surface-low);
+        border-bottom: 1px solid var(--surface-high);
+      }
+
+      .wholesale-table td {
+        padding: 1rem;
+        font-size: 0.85rem;
+        border-bottom: 1px solid var(--surface-low);
+      }
+
+      .wholesale-table tr:hover {
+        background: var(--surface-low);
+      }
+
       .empty-state {
         text-align: center;
         padding: 3rem;
@@ -922,10 +956,34 @@
           <section class="section-header">
             <div>
               <h1>Mayoristas</h1>
-              <p class="subtitle">Solicitudes B2B</p>
+              <p class="subtitle">Solicitudes B2B de potenciales clientes</p>
             </div>
           </section>
-          <p style="color: var(--muted)">Vista de mayoristas en desarrollo...</p>
+
+          <div class="filters">
+            <button class="filter-btn active" onclick="filterWholesale('all')">Todos</button>
+            <button class="filter-btn" onclick="filterWholesale('new')">Nuevos</button>
+            <button class="filter-btn" onclick="filterWholesale('contacted')">Contactados</button>
+            <button class="filter-btn" onclick="filterWholesale('closed')">Cerrados</button>
+          </div>
+
+          <div class="wholesale-table-wrapper">
+            <table class="wholesale-table">
+              <thead>
+                <tr>
+                  <th>Nombre</th>
+                  <th>Empresa</th>
+                  <th>Email</th>
+                  <th>Telefono</th>
+                  <th>Localidad</th>
+                  <th>Fecha</th>
+                  <th>Estado</th>
+                </tr>
+              </thead>
+              <tbody id="wholesaleTableBody">
+              </tbody>
+            </table>
+          </div>
         </div>
 
         <div id="view-workshops" class="view">
@@ -1321,9 +1379,82 @@
         alert("Crear nuevo pedido - funcionalidad en desarrollo");
       }
 
+      // WHOLESALE
+      const wholesaleRequests = [
+        { id: 1, name: "Carlos Rodriguez", empresa: "Casa Living", email: "carlos@casaliving.com", telefono: "+54 11 1234-5678", localidad: "Palermo, CABA", date: "2026-04-10", status: "new" },
+        { id: 2, name: "Ana Martinez", empresa: "Design Studio", email: "ana@designstudio.com", telefono: "+54 11 8765-4321", localidad: " Recoleta, CABA", date: "2026-04-09", status: "contacted" },
+        { id: 3, name: "Pedro Gonzalez", empresa: "Hotel Boutique", email: "pedro@hotelboutique.com", telefono: "+54 351 456-7890", localidad: "Cordoba, Cordoba", date: "2026-04-08", status: "new" },
+        { id: 4, name: "Maria Lopez", empresa: "Cafe Cultural", email: "maria@cafecultural.com", telefono: "+54 221 234-5678", localidad: "La Plata, Buenos Aires", date: "2026-04-07", status: "closed" },
+        { id: 5, name: "Javier Smith", empresa: "Restaurante M", email: "javier@restaurante.com", telefono: "+54 11 3456-7890", localidad: "San Telmo, CABA", date: "2026-04-06", status: "contacted" },
+      ];
+
+      let wholesaleFilter = "all";
+
+      function renderWholesale() {
+        const tbody = document.getElementById("wholesaleTableBody");
+        const filtered = wholesaleFilter === "all"
+          ? wholesaleRequests
+          : wholesaleRequests.filter(r => r.status === wholesaleFilter);
+
+        if (filtered.length === 0) {
+          tbody.innerHTML = `
+            <tr>
+              <td colspan="7">
+                <div class="empty-state">
+                  <p>No hay solicitudes con este filtro</p>
+                </div>
+              </td>
+            </tr>
+          `;
+          return;
+        }
+
+        tbody.innerHTML = filtered.map(request => {
+          const statusLabels = {
+            new: "Nuevo",
+            contacted: "Contactado",
+            closed: "Cerrado"
+          };
+
+          return `
+            <tr>
+              <td><strong>${request.name}</strong></td>
+              <td>${request.empresa}</td>
+              <td><a href="mailto:${request.email}">${request.email}</a></td>
+              <td>${request.telefono}</td>
+              <td>${request.localidad}</td>
+              <td>${request.date}</td>
+              <td>
+                <select class="status-select ${request.status}" onchange="updateWholesaleStatus(${request.id}, this.value)" style="padding: 0.3rem 0.5rem; font-size: 0.75rem;">
+                  <option value="new" ${request.status === "new" ? "selected" : ""}>Nuevo</option>
+                  <option value="contacted" ${request.status === "contacted" ? "selected" : ""}>Contactado</option>
+                  <option value="closed" ${request.status === "closed" ? "selected" : ""}>Cerrado</option>
+                </select>
+              </td>
+            </tr>
+          `;
+        }).join("");
+      }
+
+      function filterWholesale(status) {
+        wholesaleFilter = status;
+        document.querySelectorAll("#view-wholesale .filter-btn").forEach(btn => btn.classList.remove("active"));
+        event.target.classList.add("active");
+        renderWholesale();
+      }
+
+      function updateWholesaleStatus(id, newStatus) {
+        const request = wholesaleRequests.find(r => r.id === id);
+        if (request) {
+          request.status = newStatus;
+          renderWholesale();
+        }
+      }
+
       // Initialize
       renderProducts();
       renderOrders();
+      renderWholesale();
     </script>
   </body>
 </html>

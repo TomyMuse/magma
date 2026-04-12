@@ -1068,17 +1068,29 @@
             </p>
 
             <form class="wholesale-form" action="#" method="post">
-              <div class="field">
-                <label for="mayorista-nombre">Nombre</label>
-                <input id="mayorista-nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+              <div class="form-row">
+                <div class="field">
+                  <label for="mayorista-nombre">Nombre</label>
+                  <input id="mayorista-nombre" name="nombre" type="text" placeholder="Tu nombre" required />
+                </div>
+                <div class="field">
+                  <label for="mayorista-empresa">Empresa</label>
+                  <input id="mayorista-empresa" name="empresa" type="text" placeholder="Nombre de tu negocio" />
+                </div>
+              </div>
+              <div class="form-row">
+                <div class="field">
+                  <label for="mayorista-mail">Mail</label>
+                  <input id="mayorista-mail" name="mail" type="email" placeholder="tu@email.com" required />
+                </div>
+                <div class="field">
+                  <label for="mayorista-telefono">Telefono</label>
+                  <input id="mayorista-telefono" name="telefono" type="tel" placeholder="+54 9 ..." required />
+                </div>
               </div>
               <div class="field">
-                <label for="mayorista-mail">Mail</label>
-                <input id="mayorista-mail" name="mail" type="email" placeholder="tu@email.com" required />
-              </div>
-              <div class="field">
-                <label for="mayorista-telefono">Telefono</label>
-                <input id="mayorista-telefono" name="telefono" type="tel" placeholder="+54 9 ..." required />
+                <label for="mayorista-localidad">Localidad</label>
+                <input id="mayorista-localidad" name="localidad" type="text" placeholder="Ciudad y provincia" />
               </div>
               <button class="btn btn-primary" type="submit">Solicitar catalogo</button>
             </form>
