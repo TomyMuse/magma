@@ -1437,7 +1437,7 @@
           <div class="dashboard-grid">
             <div class="dashboard-card">
               <div class="card-header">
-                <h3>Ventas последние 7 dias</h3>
+                <h3>Ventas ultimos 7 dias</h3>
                 <span class="badge">+18%</span>
               </div>
               <div class="mini-chart">
@@ -1948,7 +1948,13 @@
         document.querySelectorAll(".view").forEach(v => v.classList.remove("active"));
         document.getElementById(`view-${viewName}`).classList.add("active");
         document.querySelectorAll(".menu button").forEach(b => b.classList.remove("active"));
-        event.target.classList.add("active");
+        if (event && event.target) {
+          event.target.classList.add("active");
+        }
+        // Close mobile menu when selecting a view
+        const sidebar = document.querySelector(".sidebar");
+        sidebar.classList.remove("mobile-open");
+        sidebar.style.display = "";
       }
 
       function openModal(product = null) {
