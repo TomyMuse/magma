@@ -1316,13 +1316,6 @@
         updateOrderStatus(id, newStatus);
         viewOrder(id);
       }
-          const statuses = ["pending", "production", "ready", "shipped", "delivered"];
-          const currentIndex = statuses.indexOf(order.status);
-          const nextStatus = statuses[(currentIndex + 1) % statuses.length];
-          order.status = nextStatus;
-          renderOrders();
-        }
-      }
 
       function openOrderModal() {
         alert("Crear nuevo pedido - funcionalidad en desarrollo");
