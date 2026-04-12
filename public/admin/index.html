@@ -470,11 +470,11 @@
       }
 
       .stats-row {
-        grid-template-columns: repeat(5, 1fr);
+        grid-template-columns: repeat(4, 1fr);
       }
 
       .pedidos-side {
-        display: block;
+        display: none;
       }
 
       .stat-card .note {
@@ -1534,7 +1534,10 @@
               <p class="value">12</p>
               <p class="note">4 pend</p>
             </article>
-            <div class="dashboard-card compact pedidos-side">
+          </section>
+
+          <div class="dashboard-grid">
+            <div class="dashboard-card compact">
               <div class="card-header">
                 <h3>Pedidos recientes</h3>
                 <a href="#" onclick="showView('orders')" style="font-size: 0.75rem; color: var(--primary);">Ver todos →</a>
@@ -1556,9 +1559,8 @@
                 </div>
               </div>
             </div>
-          </section>
 
-          <div class="dashboard-card wide">
+            <div class="dashboard-card wide">
             <div class="card-header">
               <h3>Ventas ultimos 7 dias</h3>
               <span class="badge">+18%</span>
