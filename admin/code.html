@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MAGMA CERÁMICA Admin Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,700;1,400&amp;family=Manrope:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#7a2f22",
+                        "error": "#ba1a1a",
+                        "surface-dim": "#dcdad5",
+                        "secondary-container": "#fed8c4",
+                        "on-tertiary-fixed-variant": "#663d0b",
+                        "on-primary-fixed": "#3f0401",
+                        "surface-container-low": "#f6f3ee",
+                        "on-error": "#ffffff",
+                        "on-tertiary-fixed": "#2c1600",
+                        "secondary-fixed-dim": "#e3bfac",
+                        "outline": "#88726e",
+                        "on-surface": "#1c1c19",
+                        "on-secondary-fixed-variant": "#5a4133",
+                        "surface-container-lowest": "#ffffff",
+                        "surface-container": "#f0ede8",
+                        "on-primary": "#ffffff",
+                        "tertiary-fixed-dim": "#f7bb7e",
+                        "on-background": "#1c1c19",
+                        "tertiary-fixed": "#ffdcbd",
+                        "surface-bright": "#fcf9f4",
+                        "primary-container": "#a85243",
+                        "surface": "#fcf9f4",
+                        "tertiary-container": "#91612d",
+                        "background": "#fcf9f4",
+                        "surface-container-highest": "#e5e2dd",
+                        "secondary-fixed": "#ffdbc8",
+                        "on-tertiary-container": "#ffead8",
+                        "secondary": "#745949",
+                        "error-container": "#ffdad6",
+                        "tertiary": "#754917",
+                        "on-error-container": "#93000a",
+                        "inverse-surface": "#31302d",
+                        "on-secondary-container": "#795d4d",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-high": "#ebe8e3",
+                        "outline-variant": "#dbc1bc",
+                        "on-secondary-fixed": "#2a170b",
+                        "inverse-primary": "#ffb4a6",
+                        "inverse-on-surface": "#f3f0eb",
+                        "surface-tint": "#984637",
+                        "on-primary-container": "#ffe8e4",
+                        "primary-fixed-dim": "#ffb4a6",
+                        "primary": "#8a3b2d",
+                        "surface-variant": "#e5e2dd",
+                        "primary-fixed": "#ffdad4",
+                        "on-surface-variant": "#55433f"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Noto Serif"],
+                        "body": ["Manrope"],
+                        "label": ["Manrope"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Manrope', sans-serif; }
+        .serif { font-family: 'Noto Serif', serif; }
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-surface text-on-surface">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 overflow-y-auto bg-[#fcf9f4] dark:bg-[#1c1c19] flex flex-col gap-y-6 py-8 px-6 z-50">
+<div class="flex flex-col items-start gap-2 mb-8">
+<h1 class="font-['Noto_Serif'] italic text-xl text-[#8a3b2d]">MAGMA</h1>
+<p class="font-['Manrope'] text-sm tracking-tight text-[#745949] dark:text-[#a18a7e] opacity-70">Cerámica Admin</p>
+</div>
+<nav class="flex flex-col gap-1 flex-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#8a3b2d] dark:text-[#fcf9f4] font-semibold border-r-2 border-[#8a3b2d] hover:translate-x-1 transition-transform duration-300" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="font-['Manrope'] text-sm tracking-tight">Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#745949] dark:text-[#a18a7e] opacity-70 hover:translate-x-1 transition-transform duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined">local_mall</span>
+<span class="font-['Manrope'] text-sm tracking-tight">Products</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#745949] dark:text-[#a18a7e] opacity-70 hover:translate-x-1 transition-transform duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined">payments</span>
+<span class="font-['Manrope'] text-sm tracking-tight">Sales</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#745949] dark:text-[#a18a7e] opacity-70 hover:translate-x-1 transition-transform duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="font-['Manrope'] text-sm tracking-tight">Customers</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#745949] dark:text-[#a18a7e] opacity-70 hover:translate-x-1 transition-transform duration-300 active:scale-95" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-['Manrope'] text-sm tracking-tight">Settings</span>
+</a>
+</nav>
+<div class="mt-auto">
+<button class="w-full py-4 text-xs tracking-widest uppercase border border-outline-variant/15 text-primary hover:bg-surface-container-high transition-colors duration-300">
+                View Gallery
+            </button>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 min-h-screen">
+<!-- TopNavBar -->
+<header class="bg-[#fcf9f4]/80 dark:bg-[#1c1c19]/80 backdrop-blur-xl docked full-width top-0 sticky z-40 shadow-[0_4px_24px_rgba(138,59,45,0.06)]">
+<div class="flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center gap-8">
+<span class="font-['Noto_Serif'] antialiased text-2xl tracking-widest font-light text-[#8a3b2d] dark:text-[#fcf9f4] uppercase">MAGMA CERÁMICA</span>
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#745949]">search</span>
+<input class="bg-surface-container border-none rounded-full pl-10 pr-4 py-2 text-sm focus:ring-1 focus:ring-primary-container w-64 transition-all duration-300 font-['Manrope']" placeholder="Search archives..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-6">
+<button class="relative text-[#745949] hover:bg-[#f0ede8] p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="relative text-[#745949] hover:bg-[#f0ede8] p-2 rounded-full transition-colors">
+<span class="material-symbols-outlined">mail</span>
+</button>
+<div class="w-10 h-10 rounded-full overflow-hidden border border-primary/20">
+<img alt="Administrator Profile" data-alt="close-up portrait of a professional man in a minimalist studio setting with warm soft lighting and earthy background tones" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZSLY8azmkGltVXurP3DtLthRixiWnsvPofUQQFYCfMUvm_ZUH_hXeA9CFQcQmZmXHrBalsNxNrMA5jG3fvOTkP_xix_oco4RH6S-kFQ28s_mqcX3KiOHlNIakXNolgrBHu-fBDv9M6f2i4gyyHpSSIDXH_i2MyKuMyai47RmY3ayPJJvKJGnXy5pemdJ_2Xya5V16-4ea4m4O9Ip3QtsNCjPu2gqeig0p8flqzfPfp8sv1l5Visykz_kw-sVgLEcJ7WWAUrEUKKv2"/>
+</div>
+</div>
+</div>
+</header>
+<div class="p-12 space-y-16">
+<!-- Curatorial Overview Header -->
+<section class="max-w-7xl">
+<div class="flex flex-col gap-2">
+<span class="text-xs tracking-[0.4em] uppercase text-primary font-medium">Internal Management</span>
+<h2 class="serif text-6xl font-light text-on-surface">Curatorial Overview</h2>
+</div>
+</section>
+<!-- Key Metrics Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl">
+<div class="bg-surface-container-low p-8 rounded-xl space-y-4 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group">
+<div class="flex justify-between items-start">
+<p class="text-xs tracking-widest uppercase text-on-surface-variant">Total Revenue</p>
+<span class="material-symbols-outlined text-primary-container opacity-50">payments</span>
+</div>
+<p class="serif text-4xl font-light text-primary">€142,850.00</p>
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[14px]">trending_up</span>
+<span>12.5% increase from last quarter</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl space-y-4 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group border-t-4 border-primary/10">
+<div class="flex justify-between items-start">
+<p class="text-xs tracking-widest uppercase text-on-surface-variant">Pending Orders</p>
+<span class="material-symbols-outlined text-primary-container opacity-50">schedule</span>
+</div>
+<p class="serif text-4xl font-light text-on-surface">18 <span class="text-sm font-normal serif italic lowercase">Pieces in Kiln</span></p>
+<div class="flex items-center gap-2 text-xs text-secondary">
+<span class="material-symbols-outlined text-[14px]">priority_high</span>
+<span>4 awaiting final glaze inspection</span>
+</div>
+</div>
+<div class="bg-surface-container-low p-8 rounded-xl space-y-4 hover:shadow-xl hover:shadow-primary/5 transition-all duration-500 group">
+<div class="flex justify-between items-start">
+<p class="text-xs tracking-widest uppercase text-on-surface-variant">Low Stock Items</p>
+<span class="material-symbols-outlined text-primary-container opacity-50">inventory_2</span>
+</div>
+<p class="serif text-4xl font-light text-error">03</p>
+<div class="flex items-center gap-2 text-xs text-error">
+<span class="material-symbols-outlined text-[14px]">warning</span>
+<span>Signature Vases nearly exhausted</span>
+</div>
+</div>
+</section>
+<!-- Sales Trajectory & Signature Pieces Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-3 gap-12 max-w-7xl">
+<!-- Sales Trajectory Visual -->
+<div class="lg:col-span-2 bg-surface-container rounded-2xl p-8 relative overflow-hidden flex flex-col justify-between min-h-[450px]">
+<div class="z-10">
+<h3 class="serif text-2xl mb-2">Sales Trajectory</h3>
+<p class="text-sm text-secondary max-w-sm">Monthly acquisition data across all private galleries and showroom sales.</p>
+</div>
+<!-- Simplified Visual Chart using Gradients and Shapes to mimic organic growth -->
+<div class="absolute bottom-0 left-0 w-full h-2/3 flex items-end px-8 gap-4 pb-12">
+<div class="w-full bg-primary/20 h-[40%] rounded-t-lg"></div>
+<div class="w-full bg-primary/30 h-[60%] rounded-t-lg"></div>
+<div class="w-full bg-primary/40 h-[50%] rounded-t-lg"></div>
+<div class="w-full bg-primary/25 h-[75%] rounded-t-lg"></div>
+<div class="w-full bg-primary/60 h-[90%] rounded-t-lg"></div>
+<div class="w-full bg-primary h-[85%] rounded-t-lg"></div>
+</div>
+<div class="flex justify-between border-t border-outline-variant/15 pt-4 text-xs uppercase tracking-widest text-on-surface-variant z-10">
+<span>Jan</span><span>Feb</span><span>Mar</span><span>Apr</span><span>May</span><span>Jun</span>
+</div>
+</div>
+<!-- Signature Pieces Sidebar -->
+<div class="space-y-8">
+<div class="flex items-baseline justify-between border-b border-outline-variant/15 pb-4">
+<h3 class="serif text-xl italic">Signature Pieces</h3>
+<a class="text-[10px] uppercase tracking-widest text-primary font-bold" href="#">View Catalog</a>
+</div>
+<div class="space-y-6">
+<!-- Product Item -->
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-24 h-24 overflow-hidden rounded-lg bg-surface-container-high shrink-0">
+<img alt="Minimalist ceramic vase" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="close-up of a handmade stoneware vase with organic texture and subtle beige glaze against a clean white background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBTDNeBdxITDySe-NeDoCzWlIys9HZOu-xg95lnb0Ph0kDwp6KwkDerehnf-kA0pDNsVJA9sjfAzpU3r9ZJCjkQhLuxu2gVAS-SgKcWVTwVSydK4CWXrfTDJglvmLbffMr_Jlgw9SBYFXUr2LQEKi0EG1Uqh5H5ENzrO9PLYeoXUSwgYkGT-iMuQEeKttrJRQcfwQ9g1JpG0xfXzQ_1dyibvqFlEypYLpSalD2VMIB4tnkhsK4OcguBpkdMFubaV-wsxKuzM-oDxlwS"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-medium text-on-surface">The Obsidian Echo</h4>
+<p class="text-xs text-secondary">Matte Black Stoneware</p>
+<p class="text-sm font-semibold text-primary mt-1">€850.00</p>
+</div>
+</div>
+<!-- Product Item -->
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-24 h-24 overflow-hidden rounded-lg bg-surface-container-high shrink-0">
+<img alt="Cracked glaze bowl" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="minimalist ceramic bowl with delicate crackle glaze effect and raw terracotta rim, focused soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA6q5YCs4RklgLPHakjk-RFhtxZfXi9hYBD_0wh24ywE8ve608a111Dmg5ITYhw_mRfHARMh5x5RayFnumkHDif5TPd4-tJ9okAexDMKqKKeNwPuyYhrULUx6lJArAAiyVkOPNpIt65NhvKZW_NK6iFim3zyuaLyaukHKyAhrWG3GyZIuF7d4zcrqkkPEJfL0OaE6mSe4vdx92mw1IzPGClrMx73BXajcEgSdxV9sFJNbEqMZgLi7w4URS-6WEvqn8ltnGNivGwe7al"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-medium text-on-surface">Terra Cradle Bowl</h4>
+<p class="text-xs text-secondary">Fired Clay &amp; Crackle Glaze</p>
+<p class="text-sm font-semibold text-primary mt-1">€420.00</p>
+</div>
+</div>
+<!-- Product Item -->
+<div class="flex gap-4 group cursor-pointer">
+<div class="w-24 h-24 overflow-hidden rounded-lg bg-surface-container-high shrink-0">
+<img alt="Earthy ceramic pitcher" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" data-alt="asymmetric ceramic pitcher with a tall slender handle and earth-toned mineral wash glaze on a textured pedestal" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC2GWCT7hjNO-esnNrOUv8bVJCTrXJrXokkWcv-pXJPScSW4sWLe8ltaJU0KBdN8bVa5KQJl0wSTNNytmM99_WJJxaoljXFWuuPnsWUEbcGzFCsmlnBx2-Tg2bLKCWWEY9Pkb8DWW5irJuoxaRbHZCHIPPqhvIpywJ2Q1GpQE_RWUKtaFiDNJBS2QG3-rZnhD23NRgKMWpOtz5S1rHDMGluZEl0MeP3uqMpG3GMUpB2PpDjp0z-Bj17kVIKJCdOIUHpznyvVRjqUx6r"/>
+</div>
+<div class="flex flex-col justify-center">
+<h4 class="font-medium text-on-surface">Mineral Solace Pourer</h4>
+<p class="text-xs text-secondary">Glazed Terracotta</p>
+<p class="text-sm font-semibold text-primary mt-1">€1,100.00</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Recent Commissions Table -->
+<section class="max-w-7xl bg-surface-container-lowest p-10 rounded-2xl shadow-[0_4px_24px_rgba(138,59,45,0.03)]">
+<div class="flex items-center justify-between mb-10">
+<h3 class="serif text-3xl font-light">Recent Commissions</h3>
+<div class="flex gap-4">
+<button class="px-6 py-2 text-xs uppercase tracking-widest border border-outline-variant/15 text-on-surface-variant hover:bg-surface-container transition-colors">Export Ledger</button>
+<button class="px-6 py-2 text-xs uppercase tracking-widest bg-primary text-on-primary hover:bg-primary-container transition-all">New Entry</button>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full border-collapse">
+<thead>
+<tr class="text-left border-b border-outline-variant/15">
+<th class="pb-6 text-xs uppercase tracking-widest text-on-surface-variant font-medium">Order ID</th>
+<th class="pb-6 text-xs uppercase tracking-widest text-on-surface-variant font-medium">Patron</th>
+<th class="pb-6 text-xs uppercase tracking-widest text-on-surface-variant font-medium">Date</th>
+<th class="pb-6 text-xs uppercase tracking-widest text-on-surface-variant font-medium">State</th>
+<th class="pb-6 text-right text-xs uppercase tracking-widest text-on-surface-variant font-medium">Investment</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/5">
+<tr class="hover:bg-surface-container-low transition-colors group">
+<td class="py-6 serif text-sm text-secondary">#MG-8821</td>
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center text-[10px] font-bold">EH</div>
+<span class="font-medium">Elena Holcomb</span>
+</div>
+</td>
+<td class="py-6 text-sm text-secondary">Oct 12, 2023</td>
+<td class="py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-secondary-container text-on-secondary-container uppercase tracking-tighter">In Production</span>
+</td>
+<td class="py-6 text-right font-semibold text-on-surface">€2,450.00</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-6 serif text-sm text-secondary">#MG-8819</td>
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-tertiary-fixed text-on-tertiary-fixed flex items-center justify-center text-[10px] font-bold">JB</div>
+<span class="font-medium">Julian Beck</span>
+</div>
+</td>
+<td class="py-6 text-sm text-secondary">Oct 10, 2023</td>
+<td class="py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-surface-container-highest text-on-surface-variant uppercase tracking-tighter">Shipped</span>
+</td>
+<td class="py-6 text-right font-semibold text-on-surface">€1,120.00</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-6 serif text-sm text-secondary">#MG-8815</td>
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center text-[10px] font-bold">SC</div>
+<span class="font-medium">Sienna Cross</span>
+</div>
+</td>
+<td class="py-6 text-sm text-secondary">Oct 08, 2023</td>
+<td class="py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-error-container text-on-error-container uppercase tracking-tighter">Payment Pending</span>
+</td>
+<td class="py-6 text-right font-semibold text-on-surface">€4,800.00</td>
+</tr>
+<tr class="hover:bg-surface-container-low transition-colors">
+<td class="py-6 serif text-sm text-secondary">#MG-8812</td>
+<td class="py-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-primary-fixed text-on-primary-fixed flex items-center justify-center text-[10px] font-bold">MK</div>
+<span class="font-medium">Marcus Kael</span>
+</div>
+</td>
+<td class="py-6 text-sm text-secondary">Oct 05, 2023</td>
+<td class="py-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-secondary-container text-on-secondary-container uppercase tracking-tighter">Completed</span>
+</td>
+<td class="py-6 text-right font-semibold text-on-surface">€890.00</td>
+</tr>
+</tbody>
+</table>
+</div>
+</section>
+</div>
+<!-- Decorative Footer Accent -->
+<footer class="p-12 mt-12 border-t border-outline-variant/10 text-center opacity-40">
+<p class="serif italic text-sm text-secondary">Crafted from earth, refined by fire. MAGMA CERÁMICA © 2024</p>
+</footer>
+</main>
+<!-- FAB Action (Contextual to Dashboard) -->
+<button class="fixed bottom-8 right-8 w-16 h-16 rounded-full bg-primary text-on-primary shadow-2xl shadow-primary/40 flex items-center justify-center hover:scale-110 active:scale-95 transition-all duration-300 z-50">
+<span class="material-symbols-outlined text-3xl">add</span>
+</button>
+</body></html>
