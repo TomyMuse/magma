@@ -617,26 +617,46 @@
       }
 
       .finance-grid {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        gap: 1rem;
+        display: none;
       }
 
-      .finance-item {
-        text-align: center;
-        padding: 0.75rem;
+      .finance-table {
+        display: grid;
+        gap: 0.6rem;
+      }
+
+      .finance-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.8rem 1rem;
         background: var(--surface-low);
         border-radius: 0.6rem;
       }
 
-      .finance-item.total {
-        background: var(--primary);
-        color: #fff;
+      .finance-row span {
+        font-size: 0.9rem;
+        color: var(--secondary);
       }
 
-      .finance-item.small {
-        font-size: 0.7rem;
-        color: var(--muted);
+      .finance-row strong {
+        font-size: 1.1rem;
+        color: var(--text);
+      }
+
+      .finance-row.total {
+        background: var(--primary);
+        margin-top: 0.5rem;
+      }
+
+      .finance-row.total span {
+        color: #fff;
+        font-weight: 600;
+      }
+
+      .finance-row.total strong {
+        color: #fff;
+        font-size: 1.3rem;
       }
 
       .finance-item .value {
@@ -1557,22 +1577,22 @@
               <div class="card-header">
                 <h3>Resumen financiero del mes</h3>
               </div>
-              <div class="finance-grid">
-                <div class="finance-item">
-                  <small>Ingresos por ventas</small>
-                  <p class="value">$2.480.300</p>
+              <div class="finance-table">
+                <div class="finance-row">
+                  <span>Ingresos por ventas</span>
+                  <strong>$2.480.300</strong>
                 </div>
-                <div class="finance-item">
-                  <small>Ingresos por talleres</small>
-                  <p class="value">$300.000</p>
+                <div class="finance-row">
+                  <span>Ingresos por talleres</span>
+                  <strong>$300.000</strong>
                 </div>
-                <div class="finance-item">
-                  <small>Mayoristas (potencial)</small>
-                  <p class="value">$580.000</p>
+                <div class="finance-row">
+                  <span>Mayoristas (potencial)</span>
+                  <strong>$580.000</strong>
                 </div>
-                <div class="finance-item total">
-                  <small>Total estimado</small>
-                  <p class="value">$3.360.300</p>
+                <div class="finance-row total">
+                  <span>Total estimado</span>
+                  <strong>$3.360.300</strong>
                 </div>
               </div>
             </div>
