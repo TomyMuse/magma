@@ -140,6 +140,34 @@
         margin-bottom: 1.5rem;
       }
 
+      .menu-toggle {
+        display: none;
+        width: 40px;
+        height: 40px;
+        border: 0;
+        border-radius: 0.5rem;
+        background: var(--surface-container);
+        color: var(--secondary);
+        font-size: 1.2rem;
+        cursor: pointer;
+      }
+
+      .mobile-header {
+        display: none;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0.75rem 1rem;
+        background: var(--surface-low);
+        border-bottom: 1px solid var(--surface-high);
+      }
+
+      .mobile-brand {
+        font-family: "Noto Serif", serif;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text);
+      }
+
       .search {
         flex: 1;
         max-width: 420px;
@@ -519,18 +547,28 @@
           display: none;
         }
 
+        .mobile-header {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
         .topbar {
-          flex-direction: column;
-          align-items: stretch;
-          gap: 0.75rem;
+          flex-wrap: wrap;
+          gap: 0.5rem;
         }
 
         .topbar .search {
-          max-width: 100%;
+          flex: 1;
+          min-width: 0;
         }
 
         .top-actions {
-          justify-content: flex-end;
+          display: flex;
         }
 
         .stats-row {
@@ -1144,8 +1182,14 @@
         </div>
       </aside>
 
+      <div class="mobile-header">
+        <span class="mobile-brand">Magma Panel de Admin</span>
+        <button type="button" class="menu-toggle" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
+      </div>
+
       <main class="main">
         <header class="topbar">
+          <button type="button" class="menu-toggle" aria-label="Menu" onclick="toggleMobileMenu()">☰</button>
           <input class="search" type="search" id="globalSearch" placeholder="Buscar en todo el panel..." oninput="handleGlobalSearch(this.value)" />
           <div class="top-actions">
             <button type="button" class="icon-btn" aria-label="Actualizar" onclick="refreshData()">🔄</button>
@@ -2014,6 +2058,24 @@
         renderStudents();
         document.getElementById("globalSearch").value = "";
         alert("Datos actualizados");
+      }
+
+      function toggleMobileMenu() {
+        const sidebar = document.querySelector(".sidebar");
+        if (sidebar.style.display === "flex") {
+          sidebar.style.display = "none";
+        } else {
+          sidebar.style.display = "flex";
+          sidebar.style.position = "fixed";
+          sidebar.style.top = "0";
+          sidebar.style.left = "0";
+          sidebar.style.height = "100vh";
+          sidebar.style.zIndex = "100";
+          sidebar.style.width = "240px";
+          sidebar.style.padding = "1.2rem";
+          sidebar.style.background = "var(--surface-low)";
+          sidebar.style.borderRight = "1px solid var(--surface-high)";
+        }
       }
 
       // Initialize
