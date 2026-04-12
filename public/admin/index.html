@@ -452,6 +452,29 @@
         margin-top: 0.2rem;
       }
 
+      .stat-card.small {
+        padding: 0.6rem;
+        aspect-ratio: 1.5;
+      }
+
+      .stat-card.small small {
+        font-size: 0.55rem;
+      }
+
+      .stat-card.small .value {
+        font-size: 1rem;
+      }
+
+      .stat-card.small .note {
+        font-size: 0.6rem;
+      }
+
+      .stat-card .note {
+        font-size: 0.72rem;
+        color: var(--muted);
+        margin-top: 0.2rem;
+      }
+
       .stat-card .note.positive { color: #1e7e34; }
       .stat-card .note.warning { color: #b08800; }
 
@@ -1440,48 +1463,29 @@
           </section>
 
           <section class="stats-row">
-            <article class="stat-card highlight">
+            <article class="stat-card small">
               <small>Ventas del mes</small>
               <p class="value">$2.480.300</p>
-              <p class="note positive">↑ 12% vs mes anterior</p>
+              <p class="note positive">↑ 12%</p>
             </article>
-            <article class="stat-card">
+            <article class="stat-card small">
               <small>Pedidos activos</small>
               <p class="value">36</p>
-              <p class="note">9 listos para despacho</p>
+              <p class="note">9 listos</p>
             </article>
-            <article class="stat-card">
-              <small>Productos en stock</small>
+            <article class="stat-card small">
+              <small>Productos stock</small>
               <p class="value">24</p>
-              <p class="note warning">3 con stock bajo</p>
+              <p class="note warning">3 bajo</p>
             </article>
-            <article class="stat-card">
-              <small>Alumnos talleres</small>
+            <article class="stat-card small">
+              <small>Alumnos</small>
               <p class="value">12</p>
-              <p class="note">4 pagos pendientes</p>
+              <p class="note">4 pend</p>
             </article>
           </section>
 
           <div class="dashboard-grid">
-            <div class="dashboard-card wide">
-              <div class="card-header">
-                <h3>Ventas ultimos 7 dias</h3>
-                <span class="badge">+18%</span>
-              </div>
-              <div class="mini-chart">
-                <div class="chart-bar" style="height: 45%"></div>
-                <div class="chart-bar" style="height: 62%"></div>
-                <div class="chart-bar" style="height: 38%"></div>
-                <div class="chart-bar" style="height: 75%"></div>
-                <div class="chart-bar" style="height: 55%"></div>
-                <div class="chart-bar" style="height: 88%"></div>
-                <div class="chart-bar" style="height: 70%"></div>
-              </div>
-              <div class="chart-labels">
-                <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
-              </div>
-            </div>
-
             <div class="dashboard-card wide">
               <div class="card-header">
                 <h3>Pedidos recientes</h3>
@@ -1516,6 +1520,25 @@
                   </div>
                   <span class="status-dot delivered"></span>
                 </div>
+              </div>
+            </div>
+
+            <div class="dashboard-card wide">
+              <div class="card-header">
+                <h3>Ventas ultimos 7 dias</h3>
+                <span class="badge">+18%</span>
+              </div>
+              <div class="mini-chart">
+                <div class="chart-bar" style="height: 45%"></div>
+                <div class="chart-bar" style="height: 62%"></div>
+                <div class="chart-bar" style="height: 38%"></div>
+                <div class="chart-bar" style="height: 75%"></div>
+                <div class="chart-bar" style="height: 55%"></div>
+                <div class="chart-bar" style="height: 88%"></div>
+                <div class="chart-bar" style="height: 70%"></div>
+              </div>
+              <div class="chart-labels">
+                <span>Lun</span><span>Mar</span><span>Mie</span><span>Jue</span><span>Vie</span><span>Sab</span><span>Dom</span>
               </div>
             </div>
 
