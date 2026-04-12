@@ -1109,6 +1109,11 @@
             <button class="btn btn-primary" onclick="openWorkshopModal()">+ Agregar alumno</button>
           </section>
 
+          <div class="workshop-config" style="margin-bottom: 1.5rem; display: flex; align-items: center; gap: 1rem;">
+            <label style="font-size: 0.85rem; font-weight: 600;">Valor del mes:</label>
+            <input type="number" id="workshopPrice" value="25000" style="padding: 0.5rem; border: 1px solid var(--surface-high); border-radius: 0.5rem; width: 120px; font-size: 0.9rem;" onchange="renderStudents()" />
+          </div>
+
           <div class="workshop-stats">
             <div class="stat-card">
               <small>Alumnos activos</small>
@@ -1126,9 +1131,8 @@
 
           <div class="filters">
             <button class="filter-btn active" onclick="filterWorkshop('all')">Todos</button>
-            <button class="filter-btn" onclick="filterWorkshop('active')">Activos</button>
-            <button class="filter-btn" onclick="filterWorkshop('pending')">Pago pendiente</button>
-            <button class="filter-btn" onclick="filterWorkshop('completed')">Completado</button>
+            <button class="filter-btn" onclick="filterWorkshop('pending')">Pendiente</button>
+            <button class="filter-btn" onclick="filterWorkshop('paid')">Pagado</button>
           </div>
 
           <div class="students-table-wrapper">
@@ -1137,10 +1141,10 @@
                 <tr>
                   <th>Alumno</th>
                   <th>Telefono</th>
-                  <th>Mes actual</th>
-                  <th>Clases (4)</th>
-                  <th>Estado pago</th>
-                  <th>Acciones</th>
+                  <th>Mes</th>
+                  <th>Importe</th>
+                  <th>Estado</th>
+                  <th>Accion</th>
                 </tr>
               </thead>
               <tbody id="studentsTableBody">
@@ -1609,23 +1613,22 @@
       const currentMonth = months[new Date().getMonth()];
 
       const students = [
-        { id: 1, name: "Laura Fernandez", phone: "+54 11 2345-6789", month: currentMonth, classes: [true, true, false, false], payment: "pending" },
-        { id: 2, name: "Miguel Torres", phone: "+54 11 8765-4321", month: currentMonth, classes: [true, true, true, false], payment: "paid" },
-        { id: 3, name: "Sofia Gomez", phone: "+54 221 345-6789", month: "Marzo", classes: [true, true, true, true], payment: "paid" },
-        { id: 4, name: "Diego Ramirez", phone: "+54 351 456-7890", month: currentMonth, classes: [true, false, false, false], payment: "overdue" },
-        { id: 5, name: "Valentina Lopez", phone: "+54 11 5678-1234", month: currentMonth, classes: [true, true, true, true], payment: "paid" },
-        { id: 6, name: "Santiago Martinez", phone: "+54 11 9876-5432", month: currentMonth, classes: [true, false, false, false], payment: "pending" },
+        { id: 1, name: "Laura Fernandez", phone: "+54 11 2345-6789", month: currentMonth, payment: "pending" },
+        { id: 2, name: "Miguel Torres", phone: "+54 11 8765-4321", month: currentMonth, payment: "paid" },
+        { id: 3, name: "Sofia Gomez", phone: "+54 221 345-6789", month: "Marzo", payment: "paid" },
+        { id: 4, name: "Diego Ramirez", phone: "+54 351 456-7890", month: currentMonth, payment: "pending" },
+        { id: 5, name: "Valentina Lopez", phone: "+54 11 5678-1234", month: currentMonth, payment: "paid" },
       ];
 
       let workshopFilter = "all";
 
       function renderStudents() {
         const tbody = document.getElementById("studentsTableBody");
+        const price = Number(document.getElementById("workshopPrice").value) || 25000;
         
-        // Update stats
-        const activeCount = students.filter(s => s.month === currentMonth && s.payment !== "completed").length;
-        const pendingCount = students.filter(s => s.payment === "pending" || s.payment === "overdue").length;
-        const revenue = students.filter(s => s.payment === "paid" && s.month === currentMonth).length * 25000;
+        const activeCount = students.filter(s => s.month === currentMonth).length;
+        const pendingCount = students.filter(s => s.payment === "pending").length;
+        const revenue = students.filter(s => s.payment === "paid" && s.month === currentMonth).length * price;
         
         document.getElementById("activeStudentsCount").textContent = activeCount;
         document.getElementById("pendingPaymentsCount").textContent = pendingCount;
@@ -1633,11 +1636,7 @@
 
         const filtered = workshopFilter === "all" 
           ? students 
-          : workshopFilter === "active"
-          ? students.filter(s => s.month === currentMonth && s.payment !== "completed")
-          : workshopFilter === "pending"
-          ? students.filter(s => s.payment === "pending" || s.payment === "overdue")
-          : students.filter(s => s.classes.every(c => c));
+          : students.filter(s => s.payment === workshopFilter);
 
         if (filtered.length === 0) {
           tbody.innerHTML = `
@@ -1653,33 +1652,19 @@
         }
 
         tbody.innerHTML = filtered.map(student => {
-          const paymentLabels = {
-            paid: "Pagado",
-            pending: "Pendiente",
-            overdue: "Vencido",
-            completed: "Completado"
-          };
-
           return `
             <tr>
               <td><strong>${student.name}</strong></td>
               <td>${student.phone}</td>
               <td>${student.month}</td>
+              <td>$${price.toLocaleString("es-AR")}</td>
               <td>
-                <div class="classes-progress">
-                  ${student.classes.map((done, i) => `
-                    <span class="class-dot ${done ? 'done' : ''} ${i === student.classes.filter(Boolean).length && !done ? 'current' : ''}">${i + 1}</span>
-                  `).join("")}
-                </div>
+                <span class="payment-status ${student.payment}">${student.payment === "paid" ? "Pagado" : "Pendiente"}</span>
               </td>
               <td>
-                <span class="payment-status ${student.payment}">${paymentLabels[student.payment]}</span>
-              </td>
-              <td>
-                <div class="order-actions">
-                  <button onclick="toggleClass(${student.id})">Clase</button>
-                  <button onclick="togglePayment(${student.id})">Pago</button>
-                </div>
+                <button class="btn ${student.payment === "paid" ? "btn-secondary" : "btn-primary"}" style="padding: 0.4rem 0.8rem; font-size: 0.75rem;" onclick="togglePayment(${student.id})">
+                  ${student.payment === "paid" ? "Marcar pendiente" : "Marcar pagado"}
+                </button>
               </td>
             </tr>
           `;
@@ -1693,26 +1678,10 @@
         renderStudents();
       }
 
-      function toggleClass(id) {
-        const student = students.find(s => s.id === id);
-        if (student) {
-          const nextClass = student.classes.findIndex(c => !c);
-          if (nextClass !== -1) {
-            student.classes[nextClass] = true;
-          }
-          if (student.classes.every(c => c)) {
-            student.payment = "completed";
-          }
-          renderStudents();
-        }
-      }
-
       function togglePayment(id) {
         const student = students.find(s => s.id === id);
         if (student) {
-          const statuses = ["pending", "paid", "overdue"];
-          const currentIndex = statuses.indexOf(student.payment);
-          student.payment = statuses[(currentIndex + 1) % statuses.length];
+          student.payment = student.payment === "paid" ? "pending" : "paid";
           renderStudents();
         }
       }
@@ -1727,7 +1696,6 @@
           name: name,
           phone: phone || "",
           month: currentMonth,
-          classes: [false, false, false, false],
           payment: "pending"
         };
         
